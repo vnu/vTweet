@@ -14,19 +14,34 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9f-hy-see">
-                                <rect key="frame" x="238" y="285" width="125" height="30"/>
-                                <state key="normal" title="Login With Twitter"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9f-hy-see">
+                                <rect key="frame" x="132" y="353" width="150" height="30"/>
+                                <color key="backgroundColor" red="0.23529411764705882" green="0.53725490196078429" blue="0.83137254901960789" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="f3l-XG-Ehp"/>
+                                    <constraint firstAttribute="height" constant="30" id="weS-jQ-5qZ"/>
+                                </constraints>
+                                <state key="normal" title="Login With Twitter">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zQ4-is-eO3"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="I9f-hy-see" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="TG1-NW-MOk"/>
+                            <constraint firstItem="I9f-hy-see" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="b3l-M7-anl"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <segue destination="dhM-ap-Omg" kind="presentation" identifier="com.vnu.loginSegue" id="VBp-44-Hei"/>
                     </connections>
@@ -44,7 +59,7 @@
                         <viewControllerLayoutGuide type="bottom" id="siB-oL-QHc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YTV-ms-Cz7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAe-rt-2rr">

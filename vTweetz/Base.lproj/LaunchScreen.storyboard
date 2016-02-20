@@ -17,17 +17,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TwitterLogo_white" translatesAutoresizingMaskIntoConstraints="NO" id="6zy-uM-hT1">
-                                <rect key="frame" x="132" y="174" width="150" height="150"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="vTweetz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MO-3l-2sc">
-                                <rect key="frame" x="109" y="327" width="196" height="81"/>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vTweetz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MO-3l-2sc">
+                                <rect key="frame" x="126" y="342" width="162.5" height="51.5"/>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="45"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TwitterLogo_white" translatesAutoresizingMaskIntoConstraints="NO" id="6zy-uM-hT1">
+                                <rect key="frame" x="157" y="234" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Cdq-hV-qmO"/>
+                                    <constraint firstAttribute="width" constant="100" id="ZIb-dK-Lko"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="3MO-3l-2sc" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="47z-jw-Zdf"/>
+                            <constraint firstItem="6zy-uM-hT1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5iq-tA-Wge"/>
+                            <constraint firstItem="3MO-3l-2sc" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="GSw-DB-z5F"/>
+                            <constraint firstItem="3MO-3l-2sc" firstAttribute="top" secondItem="6zy-uM-hT1" secondAttribute="bottom" constant="8.5" id="qq7-lc-aWL"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
