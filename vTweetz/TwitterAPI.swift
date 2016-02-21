@@ -16,8 +16,6 @@ class TwitterAPI{
     private let isOnline: Bool
     private let persistenceManager: PersistenceManager
     
-    var handleLogin: ((user: User?, error: NSError?) -> ())?
-    
     init(){
         httpClient = HTTPClient()
         isOnline = false
@@ -36,12 +34,20 @@ class TwitterAPI{
         httpClient.fetchUser()
     }
     
-    func loginWithCompletion(completion: (user: User?, error: NSError?)->()){
-        handleLogin = completion
-    }
-    
     func logout(){
         httpClient.logout()
+    }
+    
+    func fetchTweets(fetchString: String, completion: (tweets: [Tweet]?, error: NSError?)->()){
+       httpClient.fetchTweets(fetchString, completion: completion)
+    }
+    
+    func likeOnTweet(tweetId: String, action: String, completion: (tweet: Tweet?, error: NSError?) -> Void){
+        httpClient.likeOnTweet(tweetId, action: action, completion: completion)
+    }
+    
+    func postOnTweet(postUrl: String, completion: (tweet: Tweet?, error: NSError?) -> Void){
+        httpClient.postOnTweet(postUrl, completion: completion)
     }
     
     

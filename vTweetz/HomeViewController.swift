@@ -10,21 +10,45 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var tweetsTableView: UITableView!
+    let tweetCellId = "com.vnu.tweetcell"
+    let tweetStatus = "home_timeline"
+    
+    private var tweets = [Tweet]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let cellNib = UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle())
+        tweetsTableView.registerNib(cellNib, forCellReuseIdentifier: tweetCellId)
 
-        // Do any additional setup after loading the view.
-    }
+        tweetsTableView.estimatedRowHeight = 200
+        tweetsTableView.rowHeight = UITableViewAutomaticDimension
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-//         Dispose of any resources that can be recreated.
+
+        fetchTweets()
     }
     
-
-    @IBAction func onLogout(sender: AnyObject) {
+    @IBAction func onLogout(sender: UIBarButtonItem) {
         User.currentUser?.logout()
     }
+    
+    //Fetch Tweets
+    func fetchTweets(){
+        TwitterAPI.sharedInstance.fetchTweets(tweetStatus, completion: onFetchCompletion)
+    }
+    
+    func onFetchCompletion(tweets: [Tweet]?, error: NSError?){
+        if tweets != nil{
+            self.tweets = tweets!
+            tweetsTableView.reloadData()
+        }else{
+            print("ERROR OCCURED: \(error)")
+        }
+    }
+    
+    
+    
+
     /*
     // MARK: - Navigation
 
@@ -34,5 +58,22 @@ class HomeViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 
+}
+
+extension HomeViewController:UITableViewDelegate, UITableViewDataSource{
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(tweetCellId) as! TweetCell
+        cell.tweet = tweets[indexPath.row]
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tweets.count
+    }
+    
 }

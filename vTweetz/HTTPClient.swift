@@ -17,6 +17,8 @@ class HTTPClient: BDBOAuth1SessionManager{
     let baseUrlString = "https://api.twitter.com/"
     
     var handleLoginCompletion: ((user: User?, error: NSError?) -> ())?
+    var fetchTweetsCompletion: ((tweets: [Tweet]?, error: NSError?) -> ())?
+    var fetchTweetCompletion: ((tweet: Tweet?, error: NSError?) -> ())?
     
     init(){
         let baseUrl = NSURL(string: baseUrlString)
@@ -38,53 +40,75 @@ class HTTPClient: BDBOAuth1SessionManager{
             print("Got the request token")
             let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
             UIApplication.sharedApplication().openURL(authURL!)
-        }, failure: { (error: NSError!) -> Void in
+            }, failure: { (error: NSError!) -> Void in
                 self.handleLoginCompletion?(user: nil, error: error)
         })
     }
     
     func fetchAccessToken(urlQuery:String){
         self.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: urlQuery)!, success: { (accessToken:BDBOAuth1Credential!) -> Void in
-            print("GOt access token")
+            print("Got access token")
             self.requestSerializer.saveAccessToken(accessToken)
             self.fetchUser()
-            
-        }) { (error:NSError!) -> Void in
-            self.handleLoginCompletion?(user: nil, error: error)
+            }) { (error:NSError!) -> Void in
+                self.handleLoginCompletion?(user: nil, error: error)
         }
     }
     
     func fetchUser(){
         self.GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
-                let user = User(dictionary: response as! NSDictionary)
-                User.currentUser = user
-                self.handleLoginCompletion?(user: user, error: nil)
+            let user = User(dictionary: response as! NSDictionary)
+            User.currentUser = user
+            self.handleLoginCompletion?(user: user, error: nil)
             }) { (session: NSURLSessionDataTask?, error:NSError) -> Void in
                 self.handleLoginCompletion?(user: nil, error: error)
         }
     }
     
-    func fetchHomeTimeline(){
-        self.GET("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
-//            print(response as! NSArray)
+    func fetchTweets(fetchUrl:String, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
+        fetchTweetsCompletion = completion
+        self.GET("1.1/statuses/\(fetchUrl).json", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
             if let timeline = response as? [NSDictionary]{
-                var tweets = Tweet.tweetsWithArray(timeline)
+                let tweets = Tweet.tweetsWithArray(timeline)
+                self.fetchTweetsCompletion?(tweets: tweets, error: nil)
             }
-            
             }) { (session: NSURLSessionDataTask?, error:NSError) -> Void in
                 print("Error")
+                self.fetchTweetsCompletion?(tweets: nil, error: error)
         }
     }
+    
+    func likeOnTweet(tweetId: String, action: String, completion: (tweet: Tweet?, error: NSError?) -> Void){
+        fetchTweetCompletion = completion
+        self.POST("1.1/favorites/\(action).json?id=\(tweetId)", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
+            if let tweetDictionary = response as? NSDictionary{
+                let tweet = Tweet(dictionary: tweetDictionary)
+                self.fetchTweetCompletion?(tweet: tweet, error: nil)
+            }
+            }) { (session: NSURLSessionDataTask?, error:NSError) -> Void in
+                print("Error: \(error)")
+                self.fetchTweetCompletion?(tweet: nil, error: error)
+        }
+    }
+    
+    func postOnTweet(postUrl:String, completion: (tweet: Tweet?, error: NSError?) -> Void){
+        fetchTweetCompletion = completion
+        self.POST("1.1/statuses/\(postUrl).json", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
+            if let tweetDictionary = response as? NSDictionary{
+                let tweet = Tweet(dictionary: tweetDictionary)
+                self.fetchTweetCompletion?(tweet: tweet, error: nil)
+            }
+            }) { (session: NSURLSessionDataTask?, error:NSError) -> Void in
+                print("Error: \(error)")
+                self.fetchTweetCompletion?(tweet: nil, error: error)
+        }
+    }
+    
     
     func logout(){
         User.currentUser = nil
         self.requestSerializer.removeAccessToken()
         NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
     }
-
-    
-    
-    
-    
     
 }
