@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     
     let tweetCellId = "com.vnu.tweetcell"
     let tweetStatus = "home_timeline"
+    let detailSegueId = "com.vnu.tweetDetail"
     
     private var tweets = [Tweet]()
     
@@ -25,8 +26,14 @@ class HomeViewController: UIViewController {
 
         tweetsTableView.estimatedRowHeight = 200
         tweetsTableView.rowHeight = UITableViewAutomaticDimension
-
+        setTweetyNavBar()
         fetchTweets()
+    }
+    
+    func setTweetyNavBar(){
+        let logo = UIImage(named: "Twitter_logo_blue_32")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
     }
     
     
@@ -48,7 +55,19 @@ class HomeViewController: UIViewController {
         }
     }
     
-    
+    //Segue into Detail View
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == detailSegueId {
+            if let destination = segue.destinationViewController as? TweetViewController {
+                if let cell = sender as? TweetCell{
+                    let indexPath = self.tweetsTableView!.indexPathForCell(cell)
+                    let index = indexPath!.row
+                    destination.tweet = tweets[index]
+                }
+                destination.hidesBottomBarWhenPushed = true
+            }
+        }
+    }
     
 
     /*
@@ -76,6 +95,12 @@ extension HomeViewController:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as!TweetCell
+        self.performSegueWithIdentifier(detailSegueId, sender: selectedCell)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
 }
