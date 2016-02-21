@@ -27,10 +27,13 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var replyButton: UIButton!
     
+    @IBOutlet weak var tweetActionView: UIStackView!
     let retweetImage = UIImage(named: "retweet-action-on")
     let unretweetImage = UIImage(named: "retweet-action")
     let likeImage = UIImage(named: "like-action-on")
     let unlikeImage = UIImage(named: "like-action")
+    
+    let detailComposeSegueId = "tweetDetailComposeSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +43,21 @@ class TweetViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setTweetAction(){
+        if let retweetBy = tweet.retweetedBy{
+            tweetActionView.hidden = false
+            tweetActionImage.image = unretweetImage
+            tweetActionLabel.text = "\(retweetBy) Retweeted"
+        }else if let inReplyto = tweet.inReplyto{
+            tweetActionView.hidden = false
+            tweetActionLabel.text = "In reply to @\(inReplyto)"
+        }
+        else{
+            tweetActionView.hidden = true
+        }
+        
     }
     
     func setUpTweet(){
@@ -52,6 +70,7 @@ class TweetViewController: UIViewController {
         setTweetText()
         setLikeImage(!tweet.liked!)
         setRetweetImage(!tweet.retweeted!)
+        setTweetAction()
     }
     
     func setTweetText(){
@@ -104,6 +123,22 @@ class TweetViewController: UIViewController {
         }
         
         tweet.like()
+    }
+    
+    
+    @IBAction func onReply(sender: AnyObject) {
+        self.performSegueWithIdentifier(self.detailComposeSegueId, sender: self)
+    }
+    
+    //Segue into Detail View
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == detailComposeSegueId {
+            if let destination = segue.destinationViewController as? ComposeViewController {
+                destination.fromTweet = self.tweet
+                destination.toScreenNames = ["@\(self.tweet.user!.screenName!)"]
+                destination.hidesBottomBarWhenPushed = true
+            }
+        }
     }
     
     

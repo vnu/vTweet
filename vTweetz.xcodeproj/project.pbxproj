@@ -24,6 +24,7 @@
 		E4D95F601C78E57700AFA22D /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4D95F5E1C78E57700AFA22D /* TweetCell.xib */; };
 		E4D95F641C79A58800AFA22D /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D95F631C79A58800AFA22D /* TweetViewController.swift */; };
 		E4D95F661C7A2F8E00AFA22D /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D95F651C7A2F8E00AFA22D /* ComposeViewController.swift */; };
+		E4D95F681C7A69E100AFA22D /* TwitterKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D95F671C7A69E100AFA22D /* TwitterKeyboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		E4D95F5E1C78E57700AFA22D /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
 		E4D95F631C79A58800AFA22D /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		E4D95F651C7A2F8E00AFA22D /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		E4D95F671C7A69E100AFA22D /* TwitterKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterKeyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				E4D95F5D1C78E57700AFA22D /* TweetCell.swift */,
 				E4D95F5E1C78E57700AFA22D /* TweetCell.xib */,
+				E4D95F671C7A69E100AFA22D /* TwitterKeyboard.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				E4D95F3A1C76C7FA00AFA22D /* LoginViewController.swift in Sources */,
 				E4D95F541C76CCF900AFA22D /* HTTPClient.swift in Sources */,
 				E4D95F521C76CCEA00AFA22D /* TwitterAPI.swift in Sources */,
+				E4D95F681C7A69E100AFA22D /* TwitterKeyboard.swift in Sources */,
 				E4D95F661C7A2F8E00AFA22D /* ComposeViewController.swift in Sources */,
 				E4D95F641C79A58800AFA22D /* TweetViewController.swift in Sources */,
 				E4D95F5F1C78E57700AFA22D /* TweetCell.swift in Sources */,

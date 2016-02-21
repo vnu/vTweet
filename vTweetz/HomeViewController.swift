@@ -17,9 +17,11 @@ class HomeViewController: UIViewController {
     var reachedAPILimit = false
     
     let tweetCellId = "com.vnu.tweetcell"
-    let tweetStatus = "home_timeline.json"
+    let tweetStatus = "user_timeline.json"
     let detailSegueId = "com.vnu.tweetDetail"
     let refreshControl = UIRefreshControl()
+    
+    let replySegueId = "com.vnu.ReplySegue"
     
     private var tweets = [Tweet]()
     
@@ -77,6 +79,13 @@ class HomeViewController: UIViewController {
                 }
                 destination.hidesBottomBarWhenPushed = true
             }
+        }else if(segue.identifier == replySegueId){
+            if let destination = segue.destinationViewController as? ComposeViewController {
+                let cell = sender as! TweetCell
+                destination.fromTweet = cell.tweet
+                destination.toScreenNames = ["@\(cell.tweet.user!.screenName!)"]
+                destination.hidesBottomBarWhenPushed = true
+            }
         }
     }
     
@@ -129,11 +138,12 @@ extension HomeViewController:UIScrollViewDelegate{
     }
 }
 
-extension HomeViewController:UITableViewDelegate, UITableViewDataSource{
+extension HomeViewController:UITableViewDelegate, UITableViewDataSource, TweetCellDelegate{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(tweetCellId) as! TweetCell
         cell.tweet = tweets[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
@@ -145,6 +155,11 @@ extension HomeViewController:UITableViewDelegate, UITableViewDataSource{
         let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as!TweetCell
         self.performSegueWithIdentifier(detailSegueId, sender: selectedCell)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tweetCell(tweetCell: TweetCell, onTweetReply value: Tweet) {
+        print ("On reply delegate")
+        self.performSegueWithIdentifier(replySegueId, sender: tweetCell)
     }
     
 }

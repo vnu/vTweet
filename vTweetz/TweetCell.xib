@@ -40,7 +40,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hdm-7F-wMg">
+                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hdm-7F-wMg">
                         <rect key="frame" x="41" y="2" width="271" height="15"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reply-action_0" translatesAutoresizingMaskIntoConstraints="NO" id="4HE-1M-3JZ">
@@ -71,6 +71,9 @@
                                     <constraint firstAttribute="height" constant="20" id="umz-4A-TPg"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="reply-action_0"/>
+                                <connections>
+                                    <action selector="onReply:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sbX-cJ-Q51"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uhd-sb-jzW">
                                 <rect key="frame" x="60" y="0.0" width="43.5" height="20"/>
@@ -173,6 +176,7 @@
                 <outlet property="screenNameLabel" destination="hF0-oZ-KDj" id="HMw-xk-5y2"/>
                 <outlet property="tweetActionImage" destination="4HE-1M-3JZ" id="xU1-xS-L5X"/>
                 <outlet property="tweetActionLabel" destination="8um-Cm-aAd" id="cyZ-gk-sg8"/>
+                <outlet property="tweetActionView" destination="hdm-7F-wMg" id="1Dd-4R-Xxk"/>
                 <outlet property="tweetTextLabel" destination="cAx-GL-oNc" id="SaH-XW-GGI"/>
                 <outlet property="tweetedAtLabel" destination="bXf-ES-gqz" id="dSf-Ga-5Fn"/>
             </connections>

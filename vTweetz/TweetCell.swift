@@ -9,7 +9,13 @@
 import UIKit
 import ActiveLabel
 
+@objc protocol TweetCellDelegate {
+    optional func tweetCell(tweetCell: TweetCell, onTweetReply value: Tweet)
+}
+
 class TweetCell: UITableViewCell {
+    
+    weak var delegate: TweetCellDelegate?
     
     
     @IBOutlet weak var profileImage: UIImageView!
@@ -24,6 +30,9 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var replyButton: UIButton!
+    
+    @IBOutlet weak var tweetActionView: UIStackView!
+    
     
     let retweetImage = UIImage(named: "retweet-action-on")
     let unretweetImage = UIImage(named: "retweet-action")
@@ -42,7 +51,23 @@ class TweetCell: UITableViewCell {
             setLikeImage(!tweet.liked!)
             setRetweetImage(!tweet.retweeted!)
             setTweetText()
+            setTweetAction()
         }
+    }
+    
+    func setTweetAction(){
+        if let retweetBy = tweet.retweetedBy{
+            tweetActionView.hidden = false
+            tweetActionImage.image = unretweetImage
+            tweetActionLabel.text = "\(retweetBy) Retweeted"
+        }else if let inReplyto = tweet.inReplyto{
+            tweetActionView.hidden = false
+            tweetActionLabel.text = "In reply to @\(inReplyto)"
+        }
+        else{
+            tweetActionView.hidden = true
+        }
+        
     }
     
     func setTweetText(){
@@ -95,6 +120,12 @@ class TweetCell: UITableViewCell {
         }
 
         tweet.like()
+    }
+    
+    
+    @IBAction func onReply(sender: UIButton) {
+        print("onReplyClicked")
+        delegate?.tweetCell?(self, onTweetReply: self.tweet)
     }
     
     

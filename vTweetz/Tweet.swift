@@ -26,7 +26,11 @@ class Tweet: NSObject {
     var retweetCount: Int?
     var retweeted: Bool?
     
+    var retweetedBy: String?
+    
     //Reply
+    
+    var inReplyto: String?
     
     //Likes
     var likeCount: Int?
@@ -36,12 +40,25 @@ class Tweet: NSObject {
     init(dictionary: NSDictionary){
         self.dictionary = dictionary
         super.init()
+        if(dictionary["retweeted"] as! Bool){
+            let retweetUser = User(dictionary: dictionary["user"] as! NSDictionary)
+            retweetedBy = retweetUser.name
+            initTweet(dictionary["retweeted_status"] as! NSDictionary)
+        }else{
+          initTweet(dictionary)
+        }
+        
+    }
+    
+    func initTweet(dictionary: NSDictionary){
         tweetId = dictionary["id_str"] as? String
         user = User(dictionary: dictionary["user"] as! NSDictionary)
+        inReplyto = dictionary["in_reply_to_screen_name"] as? String
         text = dictionary["text"] as? String
         createdAtString = dictionary["created_at"] as? String
         initTimeAgo()
         initActionItems()
+        print(self.dictionary)
     }
     
     func initActionItems(){
