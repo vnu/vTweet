@@ -10,7 +10,9 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+
     @IBOutlet weak var tweetsTableView: UITableView!
+    
     let tweetCellId = "com.vnu.tweetcell"
     let tweetStatus = "home_timeline"
     
@@ -24,9 +26,9 @@ class HomeViewController: UIViewController {
         tweetsTableView.estimatedRowHeight = 200
         tweetsTableView.rowHeight = UITableViewAutomaticDimension
 
-
         fetchTweets()
     }
+    
     
     @IBAction func onLogout(sender: UIBarButtonItem) {
         User.currentUser?.logout()

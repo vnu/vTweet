@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         if User.currentUser != nil{
             print("CurrentUser Detected")
-            let vc = vStoryboard.instantiateViewControllerWithIdentifier("HomeTimelineViewController") as UIViewController
+            let vc = vStoryboard.instantiateViewControllerWithIdentifier("TweetsTabBarController") as! UITabBarController
             window?.rootViewController = vc
         }
         return true

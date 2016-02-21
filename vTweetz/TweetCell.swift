@@ -39,6 +39,7 @@ class TweetCell: UITableViewCell {
             tweetTextLabel.text = tweet.text!
             retweetLabel.text = "\(tweet.retweetCount!)"
             likeLabel.text = "\(tweet.likeCount!)"
+            profileImage.setImageWithURL(NSURL(string: (tweet.user?.profileImageUrl)!)!)
             setLikeImage(!tweet.liked!)
             setRetweetImage(!tweet.retweeted!)
         }
