@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let vc = vStoryboard.instantiateViewControllerWithIdentifier("TweetsTabBarController") as! UITabBarController
             window?.rootViewController = vc
         }
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: twitterBlue]
+        UINavigationBar.appearance().tintColor = twitterBlue
+        UITabBar.appearance().tintColor = twitterBlue
+        
         return true
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class TweetCell: UITableViewCell {
     
@@ -17,7 +18,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetedAtLabel: UILabel!
     @IBOutlet weak var tweetActionImage: UIImageView!
     @IBOutlet weak var tweetActionLabel: UILabel!
-    @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var tweetTextLabel: ActiveLabel!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var retweetLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
@@ -30,19 +31,25 @@ class TweetCell: UITableViewCell {
     let unlikeImage = UIImage(named: "like-action")
     
     
-    
     var tweet: Tweet!{
         didSet{
             nameLabel.text = tweet.user!.name!
             screenNameLabel.text = "@\(tweet.user!.screenName!)"
             tweetedAtLabel.text = tweet.tweetedAt!
-            tweetTextLabel.text = tweet.text!
             retweetLabel.text = "\(tweet.retweetCount!)"
             likeLabel.text = "\(tweet.likeCount!)"
             profileImage.setImageWithURL(NSURL(string: (tweet.user?.profileImageUrl)!)!)
             setLikeImage(!tweet.liked!)
             setRetweetImage(!tweet.retweeted!)
+            setTweetText()
         }
+    }
+    
+    func setTweetText(){
+        tweetTextLabel.URLColor = twitterBlue
+        tweetTextLabel.hashtagColor = twitterBlue
+        tweetTextLabel.mentionColor = twitterBlue
+        tweetTextLabel.text = tweet.text!
     }
     
     func setRetweetImage(retweeted: Bool){

@@ -9,6 +9,9 @@
 import UIKit
 import SwiftDate
 
+let twitterBlue = UIColor(red: 0.0/255, green: 172.0/255, blue: 237.0/255, alpha: 1.0)
+let twitterDarkBlue = UIColor(red: 0.0/255, green: 132.0/255, blue: 180.0/255, alpha: 1.0)
+
 class Tweet: NSObject {
     
     var tweetId: String?

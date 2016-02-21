@@ -12,8 +12,6 @@ import BDBOAuth1Manager
 class LoginViewController: UIViewController {
     
     var user: User?
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

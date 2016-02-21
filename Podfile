@@ -3,5 +3,7 @@ use_frameworks!
 
 pod "AFNetworking"
 pod "BDBOAuth1Manager"
-pod "DateTools"
 pod "SwiftDate"
+pod "LTMorphingLabel"
+pod "ActiveLabel"
+pod "TTTAttributedLabel"

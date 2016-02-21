@@ -116,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="2022" y="221"/>
         </scene>
-        <!--View Controller-->
+        <!--Compose View Controller-->
         <scene sceneID="3wx-fO-ZwA">
             <objects>
-                <viewController id="XVc-xj-HZf" sceneMemberID="viewController">
+                <viewController id="XVc-xj-HZf" customClass="ComposeViewController" customModule="vTweetz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JBF-5T-YH5"/>
                         <viewControllerLayoutGuide type="bottom" id="hmW-nf-SZX"/>
@@ -128,7 +128,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tH3-RK-rKe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tH3-RK-rKe" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
                                 <rect key="frame" x="68" y="20" width="68.5" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -144,7 +144,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQO-tU-dsr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQO-tU-dsr" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
                                 <rect key="frame" x="68" y="39" width="67" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.60392156860000001" green="0.66274509800000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -160,6 +160,9 @@
                                 <state key="normal" title="✕">
                                     <color key="titleColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onCancel:" destination="XVc-xj-HZf" eventType="touchUpInside" id="ghJ-uZ-QG6"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tZR-EH-bsk">
                                 <rect key="frame" x="20" y="68" width="560" height="300"/>
@@ -187,6 +190,12 @@
                             <constraint firstItem="GQO-tU-dsr" firstAttribute="top" secondItem="tH3-RK-rKe" secondAttribute="bottom" constant="2" id="vm4-M1-y8a"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="tH3-RK-rKe" id="l5D-X7-kjT"/>
+                        <outlet property="profileImage" destination="gt5-23-Mm4" id="AE6-pq-Ln8"/>
+                        <outlet property="screenNameLabel" destination="GQO-tU-dsr" id="90V-4X-yaA"/>
+                        <outlet property="tweetText" destination="tZR-EH-bsk" id="5vR-5o-O9h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Hi-nb-x9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
