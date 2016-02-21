@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     let tweetCellId = "com.vnu.tweetcell"
     let tweetStatus = "home_timeline"
     let detailSegueId = "com.vnu.tweetDetail"
+    let refreshControl = UIRefreshControl()
     
     private var tweets = [Tweet]()
     
@@ -28,6 +29,9 @@ class HomeViewController: UIViewController {
         tweetsTableView.rowHeight = UITableViewAutomaticDimension
         setTweetyNavBar()
         fetchTweets()
+
+        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        tweetsTableView.insertSubview(refreshControl, atIndex: 0)
     }
     
     func setTweetyNavBar(){
@@ -53,6 +57,9 @@ class HomeViewController: UIViewController {
         }else{
             print("ERROR OCCURED: \(error)")
         }
+        if refreshControl.refreshing{
+            refreshControl.endRefreshing()
+        }
     }
     
     //Segue into Detail View
@@ -69,6 +76,9 @@ class HomeViewController: UIViewController {
         }
     }
     
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        self.fetchTweets()
+    }
 
     /*
     // MARK: - Navigation
