@@ -50,6 +50,10 @@ class TwitterAPI{
         httpClient.postOnTweet(postUrl, completion: completion)
     }
     
+    func loadMoreTweets(fetchUrl:String, maxId: String, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
+        httpClient.loadMoreTweets(fetchUrl, maxId: maxId, completion: completion)
+    }
+    
     
     
 }

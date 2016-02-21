@@ -67,7 +67,7 @@ class HTTPClient: BDBOAuth1SessionManager{
     
     func fetchTweets(fetchUrl:String, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
         fetchTweetsCompletion = completion
-        self.GET("1.1/statuses/\(fetchUrl).json", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
+        self.GET("1.1/statuses/\(fetchUrl)", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
             if let timeline = response as? [NSDictionary]{
                 let tweets = Tweet.tweetsWithArray(timeline)
                 self.fetchTweetsCompletion?(tweets: tweets, error: nil)
@@ -77,6 +77,20 @@ class HTTPClient: BDBOAuth1SessionManager{
                 self.fetchTweetsCompletion?(tweets: nil, error: error)
         }
     }
+    
+    func loadMoreTweets(fetchUrl:String, maxId: String, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
+        fetchTweetsCompletion = completion
+        self.GET("1.1/statuses/\(fetchUrl)?max_id=\(maxId)", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
+            if let timeline = response as? [NSDictionary]{
+                let tweets = Tweet.tweetsWithArray(timeline, maxId: maxId)
+                self.fetchTweetsCompletion?(tweets: tweets, error: nil)
+            }
+            }) { (session: NSURLSessionDataTask?, error:NSError) -> Void in
+                print("Error")
+                self.fetchTweetsCompletion?(tweets: nil, error: error)
+        }
+    }
+    
     
     func likeOnTweet(tweetId: String, action: String, completion: (tweet: Tweet?, error: NSError?) -> Void){
         fetchTweetCompletion = completion

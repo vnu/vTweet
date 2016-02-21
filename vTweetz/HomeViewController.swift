@@ -13,8 +13,11 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var tweetsTableView: UITableView!
     
+    var isMoreDataLoading = false
+    var reachedAPILimit = false
+    
     let tweetCellId = "com.vnu.tweetcell"
-    let tweetStatus = "home_timeline"
+    let tweetStatus = "home_timeline.json"
     let detailSegueId = "com.vnu.tweetDetail"
     let refreshControl = UIRefreshControl()
     
@@ -55,11 +58,12 @@ class HomeViewController: UIViewController {
             self.tweets = tweets!
             tweetsTableView.reloadData()
         }else{
-            print("ERROR OCCURED: \(error)")
+            print("ERROR OCCURED: \(error?.description)")
         }
         if refreshControl.refreshing{
             refreshControl.endRefreshing()
         }
+        
     }
     
     //Segue into Detail View
@@ -79,20 +83,50 @@ class HomeViewController: UIViewController {
     func refreshControlAction(refreshControl: UIRefreshControl) {
         self.fetchTweets()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func loadMoreTweets(){
+        print("Came here to load more tweets")
+        if tweets.count > 0{
+        let maxTweetId = tweets.last?.tweetId!
+        TwitterAPI.sharedInstance.loadMoreTweets(tweetStatus, maxId: maxTweetId!) { (tweets, error) -> Void in
+            if tweets != nil{
+                self.tweets = self.tweets + tweets!
+                self.tweetsTableView.reloadData()
+                if(self.isMoreDataLoading){
+                    self.isMoreDataLoading = false
+                }
+                print(self.tweets.count)
+            }else{
+                print("ERROR OCCURED: \(error?.description)")
+            }
+            
+        }
+        }
     }
-    */
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
+}
+
+extension HomeViewController:UIScrollViewDelegate{
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+
+            let scrollViewContentHeight = tweetsTableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - (tweetsTableView.bounds.size.height)
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tweetsTableView.dragging && !reachedAPILimit) {
+                isMoreDataLoading = true
+                loadMoreTweets()
+            }
+
+        }
+    }
 }
 
 extension HomeViewController:UITableViewDelegate, UITableViewDataSource{

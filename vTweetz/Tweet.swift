@@ -93,10 +93,13 @@ class Tweet: NSObject {
     }
     
     //Class Functions
-    class func tweetsWithArray(array: [NSDictionary]) -> [Tweet]{
+    class func tweetsWithArray(array: [NSDictionary], maxId: String? = nil) -> [Tweet]{
         var tweets = [Tweet]()
         for dictionary in array{
             let tweet = Tweet(dictionary: dictionary)
+            if maxId != nil && tweet.tweetId == maxId{
+                continue
+            }
             tweets.append(tweet)
         }
         return tweets
