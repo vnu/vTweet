@@ -46,10 +46,13 @@ class TweetCell: UITableViewCell {
     }
     
     func setTweetText(){
-        tweetTextLabel.URLColor = twitterBlue
-        tweetTextLabel.hashtagColor = twitterBlue
-        tweetTextLabel.mentionColor = twitterBlue
+        tweetTextLabel.URLColor = twitterDarkBlue
+        tweetTextLabel.hashtagColor = UIColor.blackColor()
+        tweetTextLabel.mentionColor = UIColor.blackColor()
         tweetTextLabel.text = tweet.text!
+        tweetTextLabel.handleURLTap { (url: NSURL) -> () in
+            UIApplication.sharedApplication().openURL(url)
+        }
     }
     
     func setRetweetImage(retweeted: Bool){

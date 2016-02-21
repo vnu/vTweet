@@ -259,7 +259,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5x-Ds-0st">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5x-Ds-0st" customClass="ActiveLabel" customModule="ActiveLabel">
                                 <rect key="frame" x="76" y="108" width="504" height="36"/>
                                 <string key="text">Tweets are one of our most visible brand elements, so it’s important that they are presented correctly. In its most basic state, a Tweet is</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>

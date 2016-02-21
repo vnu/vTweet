@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class TweetViewController: UIViewController {
     
@@ -19,7 +20,7 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var tweetedAtLabel: UILabel!
     @IBOutlet weak var tweetActionImage: UIImageView!
     @IBOutlet weak var tweetActionLabel: UILabel!
-    @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var tweetTextLabel: ActiveLabel!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var retweetLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
@@ -45,13 +46,24 @@ class TweetViewController: UIViewController {
         nameLabel.text = tweet.user!.name!
         screenNameLabel.text = "@\(tweet.user!.screenName!)"
         tweetedAtLabel.text = tweet.tweetedAt!
-        tweetTextLabel.text = tweet.text!
         retweetLabel.text = "\(tweet.retweetCount!)"
         likeLabel.text = "\(tweet.likeCount!)"
         profileImage.setImageWithURL(NSURL(string: (tweet.user?.profileImageUrl)!)!)
+        setTweetText()
         setLikeImage(!tweet.liked!)
         setRetweetImage(!tweet.retweeted!)
     }
+    
+    func setTweetText(){
+        tweetTextLabel.URLColor = twitterDarkBlue
+        tweetTextLabel.hashtagColor = twitterDarkBlue
+        tweetTextLabel.mentionColor = twitterDarkBlue
+        tweetTextLabel.text = tweet.text!
+        tweetTextLabel.handleURLTap { (url: NSURL) -> () in
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
     func setRetweetImage(retweeted: Bool){
         if retweeted{
             self.retweetButton.setImage(unretweetImage, forState: .Normal)
