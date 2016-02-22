@@ -34,6 +34,8 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetActionView: UIStackView!
     
     
+    @IBOutlet weak var mediaImage: UIImageView!
+    @IBOutlet weak var imageMediaHeightConstraint: NSLayoutConstraint!
     let retweetImage = UIImage(named: "retweet-action-on")
     let unretweetImage = UIImage(named: "retweet-action")
     let likeImage = UIImage(named: "like-action-on")
@@ -52,6 +54,20 @@ class TweetCell: UITableViewCell {
             setRetweetImage(!tweet.retweeted!)
             setTweetText()
             setTweetAction()
+            addMediaImage()
+        }
+    }
+    
+    func addMediaImage(){
+        if let mediaUrl = tweet.mediaUrl{
+            print("Has media with \(mediaUrl)")
+            mediaImage.setImageWithURL(NSURL(string: mediaUrl)!)
+            mediaImage.hidden = false
+            mediaImage.clipsToBounds = true
+            imageMediaHeightConstraint.constant = 240
+        }else{
+            mediaImage.hidden = true
+            imageMediaHeightConstraint.constant = 0
         }
     }
     

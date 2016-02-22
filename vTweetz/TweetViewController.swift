@@ -28,6 +28,10 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var replyButton: UIButton!
     
     @IBOutlet weak var tweetActionView: UIStackView!
+    
+    @IBOutlet weak var mediaHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mediaImage: UIImageView!
+    
     let retweetImage = UIImage(named: "retweet-action-on")
     let unretweetImage = UIImage(named: "retweet-action")
     let likeImage = UIImage(named: "like-action-on")
@@ -39,7 +43,7 @@ class TweetViewController: UIViewController {
         super.viewDidLoad()
         setUpTweet()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -60,18 +64,33 @@ class TweetViewController: UIViewController {
         
     }
     
+    func addMediaImage(){
+        if let mediaUrl = tweet.mediaUrl{
+            mediaImage.setImageWithURL(NSURL(string: mediaUrl)!)
+            mediaImage.hidden = false
+            mediaImage.clipsToBounds = true
+            mediaHeightConstraint.constant = 240
+        }else{
+            mediaImage.hidden = true
+            mediaHeightConstraint.constant = 0
+        }
+    }
+    
+    
+    
     func setUpTweet(){
         if let tweet = self.tweet{
-        nameLabel.text = tweet.user!.name!
-        screenNameLabel.text = "@\(tweet.user!.screenName!)"
-        tweetedAtLabel.text = tweet.tweetedAt!
-        retweetLabel.text = "\(tweet.retweetCount!)"
-        likeLabel.text = "\(tweet.likeCount!)"
-        profileImage.setImageWithURL(NSURL(string: (tweet.user?.profileImageUrl)!)!)
-        setTweetText()
-        setLikeImage(!tweet.liked!)
-        setRetweetImage(!tweet.retweeted!)
-        setTweetAction()
+            nameLabel.text = tweet.user!.name!
+            screenNameLabel.text = "@\(tweet.user!.screenName!)"
+            tweetedAtLabel.text = tweet.tweetedAt!
+            retweetLabel.text = "\(tweet.retweetCount!)"
+            likeLabel.text = "\(tweet.likeCount!)"
+            profileImage.setImageWithURL(NSURL(string: (tweet.user?.profileImageUrl)!)!)
+            setTweetText()
+            setLikeImage(!tweet.liked!)
+            setRetweetImage(!tweet.retweeted!)
+            setTweetAction()
+            addMediaImage()
         }
     }
     
@@ -145,15 +164,15 @@ class TweetViewController: UIViewController {
     
     
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

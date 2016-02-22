@@ -37,6 +37,9 @@ class Tweet: NSObject {
     var likeCount: Int?
     var liked: Bool?
     
+    var mediaType: String?
+    var mediaUrl: String?
+    
     
     init(tweet: String){
         super.init()
@@ -81,6 +84,7 @@ class Tweet: NSObject {
         createdAt = createdAtString!.toDate(DateFormat.Custom("EEE MMM d HH:mm:ss Z y"))
         initTimeAgo()
         initActionItems()
+        initMedia()
 //        print(self.dictionary)
     }
     
@@ -108,6 +112,19 @@ class Tweet: NSObject {
                 TwitterAPI.sharedInstance.likeOnTweet(tweetId!, action: "destroy", completion: onLikeRetweetAction)
             }else{
                 TwitterAPI.sharedInstance.likeOnTweet(tweetId!, action: "create", completion: onLikeRetweetAction)
+            }
+        }
+    }
+    
+    
+    func initMedia(){
+        if dictionary != nil  && dictionary!["entities"] != nil {
+            
+            let entitiesDict = dictionary!["entities"] as! NSDictionary
+            if entitiesDict["media"] != nil {
+                let medias = entitiesDict["media"] as! NSArray
+                let media = medias[0] as! NSDictionary
+                self.mediaUrl = media["media_url"] as? String
             }
         }
     }
