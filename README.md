@@ -29,6 +29,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Show media image for Tweets
+- [x] Highlight hashtags and mentions in Detail view page and are actionable. Currently not linked to other pages like user or hashtag search
 - [x] Fancy label animation in compose using Pods
 - [x] Open web url
 - [x] User friendly timestamps
