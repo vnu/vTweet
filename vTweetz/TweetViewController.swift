@@ -61,6 +61,7 @@ class TweetViewController: UIViewController {
     }
     
     func setUpTweet(){
+        if let tweet = self.tweet{
         nameLabel.text = tweet.user!.name!
         screenNameLabel.text = "@\(tweet.user!.screenName!)"
         tweetedAtLabel.text = tweet.tweetedAt!
@@ -71,6 +72,7 @@ class TweetViewController: UIViewController {
         setLikeImage(!tweet.liked!)
         setRetweetImage(!tweet.retweeted!)
         setTweetAction()
+        }
     }
     
     func setTweetText(){

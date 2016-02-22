@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     var reachedAPILimit = false
     
     let tweetCellId = "com.vnu.tweetcell"
-    let tweetStatus = "user_timeline.json"
+    let tweetStatus = "home_timeline.json"
     let detailSegueId = "com.vnu.tweetDetail"
     let refreshControl = UIRefreshControl()
     
@@ -101,7 +101,6 @@ class HomeViewController: UIViewController {
     }
     
     func loadMoreTweets(){
-        print("Came here to load more tweets")
         if tweets.count > 0{
         let maxTweetId = tweets.last?.tweetId!
         TwitterAPI.sharedInstance.loadMoreTweets(tweetStatus, maxId: maxTweetId!) { (tweets, error) -> Void in
@@ -111,7 +110,6 @@ class HomeViewController: UIViewController {
                 if(self.isMoreDataLoading){
                     self.isMoreDataLoading = false
                 }
-                print(self.tweets.count)
             }else{
                 print("ERROR OCCURED: \(error?.description)")
             }

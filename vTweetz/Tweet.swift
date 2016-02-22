@@ -61,10 +61,10 @@ class Tweet: NSObject {
         
         if let dictionary = responseDictionary{
             self.dictionary = dictionary
-        if(dictionary["retweeted"] as! Bool){
+        if let retweetStatus = dictionary["retweeted_status"] as? NSDictionary{
             let retweetUser = User(dictionary: dictionary["user"] as! NSDictionary)
             retweetedBy = retweetUser.name
-            initTweet(dictionary["retweeted_status"] as! NSDictionary)
+            initTweet(retweetStatus)
         }else{
           initTweet(dictionary)
         }
