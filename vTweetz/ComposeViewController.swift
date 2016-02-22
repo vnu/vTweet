@@ -40,6 +40,7 @@ class ComposeViewController: UIViewController {
             tweetText.text = "\(replyToNames) "
         }
         self.tweetText.inputAccessoryView = twitterKeyboard()
+        self.tweetText.becomeFirstResponder()
     }
     
     func twitterKeyboard() -> UIToolbar{

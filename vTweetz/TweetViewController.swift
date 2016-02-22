@@ -36,6 +36,7 @@ class TweetViewController: UIViewController {
     let unretweetImage = UIImage(named: "retweet-action")
     let likeImage = UIImage(named: "like-action-on")
     let unlikeImage = UIImage(named: "like-action")
+    let replyImage = UIImage(named: "reply-action_0")
     
     let detailComposeSegueId = "tweetDetailComposeSegue"
     
@@ -56,6 +57,7 @@ class TweetViewController: UIViewController {
             tweetActionLabel.text = "\(retweetBy) Retweeted"
         }else if let inReplyto = tweet.inReplyto{
             tweetActionView.hidden = false
+            tweetActionImage.image = replyImage
             tweetActionLabel.text = "In reply to @\(inReplyto)"
         }
         else{
