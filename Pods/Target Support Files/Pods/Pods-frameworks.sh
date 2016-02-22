@@ -89,7 +89,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/BDBOAuth1Manager.framework"
   install_framework "Pods/LTMorphingLabel.framework"
   install_framework "Pods/SwiftDate.framework"
-  install_framework "Pods/TTTAttributedLabel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AFNetworking.framework"
@@ -97,5 +96,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/BDBOAuth1Manager.framework"
   install_framework "Pods/LTMorphingLabel.framework"
   install_framework "Pods/SwiftDate.framework"
-  install_framework "Pods/TTTAttributedLabel.framework"
 fi

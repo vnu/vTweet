@@ -19,7 +19,6 @@ PODS:
     - AFNetworking/NSURLSession (~> 3.0.0)
   - LTMorphingLabel (0.1.1)
   - SwiftDate (3.0.2)
-  - TTTAttributedLabel (1.13.4)
 
 DEPENDENCIES:
   - ActiveLabel
@@ -27,7 +26,6 @@ DEPENDENCIES:
   - BDBOAuth1Manager
   - LTMorphingLabel
   - SwiftDate
-  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   ActiveLabel: 087705276e6e83c98deb3c22e6fef22b10317b16
@@ -35,6 +33,5 @@ SPEC CHECKSUMS:
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
   LTMorphingLabel: dfc40f43a0dcf81867b1f29431f34e861a5f1b35
   SwiftDate: 952306bbcd546719ba7431889939b58c5f57bae8
-  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
 COCOAPODS: 0.39.0
