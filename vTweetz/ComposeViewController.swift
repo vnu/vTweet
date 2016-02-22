@@ -9,6 +9,9 @@
 import UIKit
 import LTMorphingLabel
 
+@objc protocol ComposeViewControllerDelegate {
+    optional func composeViewController(composeViewController: ComposeViewController, onCreateTweet value: Tweet)
+}
 
 class ComposeViewController: UIViewController {
     @IBOutlet weak var nameLabel: LTMorphingLabel!
@@ -16,11 +19,14 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var screenNameLabel: LTMorphingLabel!
     @IBOutlet weak var tweetText: UITextView!
     
+    weak var delegate: ComposeViewControllerDelegate?
+    
     var fromTweet: Tweet?
     var toScreenNames = [String]()
     var toolbar: UIToolbar!
     var tweetCount: UIBarButtonItem!
     var tweetButton: UIBarButtonItem!
+    var sentTweet: Tweet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,13 +59,29 @@ class ComposeViewController: UIViewController {
     
     func onTweet(controller: ComposeViewController){
         print("TweetClicked: \(self.tweetText.text)")
+        self.createTweet()
+        TwitterAPI.sharedInstance.createTweet("update", tweet: sentTweet!) { (tweet, error) -> Void in
+            if(tweet != nil){
+                print("Tweet created successfull")
+                self.delegate?.composeViewController?(self, onCreateTweet: tweet!)
+                self.onCancel(self)
+            }else{
+                print("Error creating tweet \(error?.description)")
+            }
+        }
+    }
+    
+    func createTweet(){
+        sentTweet = Tweet(tweet: tweetText.text)
+        sentTweet?.inReplytoTweet = fromTweet?.inReplytoTweet
+        sentTweet?.inReplyto = fromTweet?.user?.screenName
     }
     
     override func viewDidAppear(animated: Bool) {
         nameLabel.morphingEffect = .Sparkle
         nameLabel.text = User.currentUser?.name
         screenNameLabel.morphingEffect = .Fall
-        screenNameLabel.text = "@\(User.currentUser?.screenName)"
+        screenNameLabel.text = "@\(User.currentUser!.screenName!)"
     }
 
     override func didReceiveMemoryWarning() {

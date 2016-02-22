@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
     let refreshControl = UIRefreshControl()
     
     let replySegueId = "com.vnu.ReplySegue"
+    let homeComposeSegue = "HomeComposeSegue"
     
     private var tweets = [Tweet]()
     
@@ -83,7 +84,13 @@ class HomeViewController: UIViewController {
             if let destination = segue.destinationViewController as? ComposeViewController {
                 let cell = sender as! TweetCell
                 destination.fromTweet = cell.tweet
+                destination.delegate = self
                 destination.toScreenNames = ["@\(cell.tweet.user!.screenName!)"]
+                destination.hidesBottomBarWhenPushed = true
+            }
+        }else if(segue.identifier == homeComposeSegue){
+            if let destination = segue.destinationViewController as? ComposeViewController {
+                destination.delegate = self
                 destination.hidesBottomBarWhenPushed = true
             }
         }
@@ -113,7 +120,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -135,6 +141,13 @@ extension HomeViewController:UIScrollViewDelegate{
             }
 
         }
+    }
+}
+
+extension HomeViewController: ComposeViewControllerDelegate{
+    func composeViewController(composeViewController: ComposeViewController, onCreateTweet value: Tweet) {
+        tweets.insert(value, atIndex: 0)
+        tweetsTableView.reloadData()
     }
 }
 

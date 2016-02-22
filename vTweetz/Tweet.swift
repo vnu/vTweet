@@ -19,7 +19,7 @@ class Tweet: NSObject {
     var text: String?
     var createdAtString: String?
     var createdAt: NSDate?
-    var dictionary: NSDictionary
+    var dictionary: NSDictionary?
     var tweetedAt: String?
     
     //Retweet
@@ -31,15 +31,36 @@ class Tweet: NSObject {
     //Reply
     
     var inReplyto: String?
+    var inReplytoTweet: String?
     
     //Likes
     var likeCount: Int?
     var liked: Bool?
     
     
-    init(dictionary: NSDictionary){
-        self.dictionary = dictionary
+    init(tweet: String){
         super.init()
+        user = User.currentUser
+        text = tweet
+        createdAt = NSDate()
+        initTimeAgo()
+
+        
+        retweeted = false
+        retweetCount = 0
+        retweetedBy = nil
+        inReplyto = nil
+        inReplytoTweet = nil
+        
+        likeCount = 0
+        liked = false
+        
+    }
+    init(responseDictionary: NSDictionary?){
+        super.init()
+        
+        if let dictionary = responseDictionary{
+            self.dictionary = dictionary
         if(dictionary["retweeted"] as! Bool){
             let retweetUser = User(dictionary: dictionary["user"] as! NSDictionary)
             retweetedBy = retweetUser.name
@@ -47,32 +68,35 @@ class Tweet: NSObject {
         }else{
           initTweet(dictionary)
         }
-        
+        }
     }
     
     func initTweet(dictionary: NSDictionary){
         tweetId = dictionary["id_str"] as? String
         user = User(dictionary: dictionary["user"] as! NSDictionary)
         inReplyto = dictionary["in_reply_to_screen_name"] as? String
+        inReplytoTweet = dictionary["in_reply_to_status_id_str"] as? String
         text = dictionary["text"] as? String
         createdAtString = dictionary["created_at"] as? String
+        createdAt = createdAtString!.toDate(DateFormat.Custom("EEE MMM d HH:mm:ss Z y"))
         initTimeAgo()
         initActionItems()
-        print(self.dictionary)
+//        print(self.dictionary)
     }
     
     func initActionItems(){
         //Likes
+        if let dictionary = self.dictionary{
         likeCount = dictionary["favorite_count"] as? Int
         liked = dictionary["favorited"] as? Bool
         
         //retweet
         retweetCount = dictionary["retweet_count"] as? Int
         retweeted = dictionary["retweeted"] as? Bool
+        }
     }
     
     func initTimeAgo(){
-        createdAt = createdAtString!.toDate(DateFormat.Custom("EEE MMM d HH:mm:ss Z y"))
         let style = FormatterStyle(style: .Abbreviated, units: nil, max: 1)
         let region = Region(calendarName: .Current, timeZoneName: .Local, localeName: .Current)
         tweetedAt = createdAt?.toNaturalString(NSDate(), inRegion: region, style: style)
@@ -113,7 +137,7 @@ class Tweet: NSObject {
     class func tweetsWithArray(array: [NSDictionary], maxId: String? = nil) -> [Tweet]{
         var tweets = [Tweet]()
         for dictionary in array{
-            let tweet = Tweet(dictionary: dictionary)
+            let tweet = Tweet(responseDictionary: dictionary)
             if maxId != nil && tweet.tweetId == maxId{
                 continue
             }

@@ -96,7 +96,7 @@ class HTTPClient: BDBOAuth1SessionManager{
         fetchTweetCompletion = completion
         self.POST("1.1/favorites/\(action).json?id=\(tweetId)", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
             if let tweetDictionary = response as? NSDictionary{
-                let tweet = Tweet(dictionary: tweetDictionary)
+                let tweet = Tweet(responseDictionary: tweetDictionary)
                 self.fetchTweetCompletion?(tweet: tweet, error: nil)
             }
             }) { (session: NSURLSessionDataTask?, error:NSError) -> Void in
@@ -109,13 +109,34 @@ class HTTPClient: BDBOAuth1SessionManager{
         fetchTweetCompletion = completion
         self.POST("1.1/statuses/\(postUrl).json", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
             if let tweetDictionary = response as? NSDictionary{
-                let tweet = Tweet(dictionary: tweetDictionary)
+                let tweet = Tweet(responseDictionary: tweetDictionary)
                 self.fetchTweetCompletion?(tweet: tweet, error: nil)
             }
             }) { (session: NSURLSessionDataTask?, error:NSError) -> Void in
                 print("Error: \(error)")
                 self.fetchTweetCompletion?(tweet: nil, error: error)
         }
+    }
+    
+    func createTweet(postUrl: String, tweet: Tweet, completion: (tweet: Tweet?, error: NSError?) -> Void){
+        fetchTweetCompletion = completion
+        var params = [String: String]()
+        params["status"] = tweet.text
+        if((tweet.inReplytoTweet) != nil){
+            params["in_reply_to_status_id"] = tweet.inReplytoTweet
+        }
+
+//        let tweetParams = "status=\(tweet.text)&in_reply_to_status_id=\(tweet.inReplytoTweet)"
+        self.POST("1.1/statuses/update.json", parameters: params, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
+            if let tweetDictionary = response as? NSDictionary{
+                let tweet = Tweet(responseDictionary: tweetDictionary)
+                self.fetchTweetCompletion?(tweet: tweet, error: nil)
+            }
+            }) { (session: NSURLSessionDataTask?, error:NSError) -> Void in
+                print("Error: \(error)")
+                self.fetchTweetCompletion?(tweet: nil, error: error)
+        }
+        
     }
     
     

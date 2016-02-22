@@ -38,6 +38,10 @@ class TwitterAPI{
         httpClient.logout()
     }
     
+    func createTweet(postUrl: String, tweet: Tweet, completion: (tweet: Tweet?, error: NSError?) -> Void){
+        httpClient.createTweet(postUrl, tweet: tweet, completion: completion)
+    }
+    
     func fetchTweets(fetchString: String, completion: (tweets: [Tweet]?, error: NSError?)->()){
        httpClient.fetchTweets(fetchString, completion: completion)
     }

@@ -101,7 +101,7 @@
                     <navigationItem key="navigationItem" id="91U-ZC-NXy">
                         <barButtonItem key="rightBarButtonItem" image="new-tweet" id="4be-Dl-pg4">
                             <connections>
-                                <segue destination="XVc-xj-HZf" kind="popoverPresentation" popoverAnchorBarButtonItem="4be-Dl-pg4" id="2ZX-PT-H0n">
+                                <segue destination="XVc-xj-HZf" kind="popoverPresentation" identifier="HomeComposeSegue" popoverAnchorBarButtonItem="4be-Dl-pg4" id="2ZX-PT-H0n">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -445,6 +445,6 @@
         <image name="retweet-action" width="75" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RbE-3L-JtN"/>
+        <segue reference="2ZX-PT-H0n"/>
     </inferredMetricsTieBreakers>
 </document>
