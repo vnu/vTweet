@@ -20,6 +20,18 @@ class User: NSObject {
     var profileImageUrl: String?
     var tagLine: String?
     var dictionary: NSDictionary
+    var following: Int?
+    var followersCount: Int?
+    var friendsCount: Int?
+    var userId: String?
+    var profileBgColor: String?
+    var profileBgImageUrl: String?
+    var verified: Bool?
+    var location: String?
+    var displayUrl: String?
+    var expandedUrl: String?
+    
+    
     
     init(dictionary: NSDictionary){
         self.dictionary = dictionary
@@ -27,6 +39,27 @@ class User: NSObject {
         screenName = dictionary["screen_name"] as? String
         profileImageUrl = dictionary["profile_image_url"] as? String
         tagLine = dictionary["description"] as? String
+        following = dictionary["following"] as? Int
+        followersCount = dictionary["followers_count"] as? Int
+        friendsCount = dictionary["friends_count"] as? Int
+        userId = dictionary["id_str"] as? String
+        profileBgColor = dictionary["profile_background_color"] as? String
+        profileBgImageUrl = dictionary["profile_background_image_url"] as? String
+        verified = dictionary["verified"] as? Bool
+        location = dictionary["location"] as? String
+        
+        //Set entity Urls
+        if let entities = dictionary["entities"] as? NSDictionary{
+            if let url = entities["url"] as? NSDictionary{
+                if let entityUrls = url["urls"] as? NSArray{
+                    if let entity = entityUrls[0] as? NSDictionary{
+                        displayUrl = entity["display_url"] as? String
+                        expandedUrl = entity["expanded_url"] as? String
+                    }
+                }
+            }
+        }
+        print(dictionary)
     }
     
     func logout(){

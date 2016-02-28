@@ -148,7 +148,7 @@
                             <constraint firstAttribute="height" constant="150" id="C7U-o0-gIx"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="keyPath" value="4"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                 </subviews>

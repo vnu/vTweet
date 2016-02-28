@@ -61,7 +61,6 @@ class TweetCell: UITableViewCell {
     
     func addMediaImage(){
         if let mediaUrl = tweet.mediaUrl{
-            print("Has media with \(mediaUrl)")
             mediaImage.setImageWithURL(NSURL(string: mediaUrl)!)
             mediaImage.hidden = false
             mediaImage.clipsToBounds = true

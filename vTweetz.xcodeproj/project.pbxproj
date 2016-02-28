@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		A598CE18DA784EDCCC7FD4A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084B27B309C84B7B3E9290A8 /* Pods.framework */; };
+		E46CD7E31C8267DD003E817D /* TweetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E46CD7E21C8267DD003E817D /* TweetView.xib */; };
+		E46CD7E51C82710E003E817D /* TweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7E41C82710E003E817D /* TweetView.swift */; };
+		E46CD7E71C827551003E817D /* TweetzTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7E61C827551003E817D /* TweetzTableView.swift */; };
+		E46CD7E91C82757F003E817D /* TweetzTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E46CD7E81C82757F003E817D /* TweetzTableView.xib */; };
+		E46CD7EB1C82779A003E817D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7EA1C82779A003E817D /* ProfileViewController.swift */; };
+		E46CD7ED1C82AE9A003E817D /* UIColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7EC1C82AE9A003E817D /* UIColor+extensions.swift */; };
+		E46CD7F01C82D948003E817D /* TweetDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7EF1C82D948003E817D /* TweetDataSource.swift */; };
+		E46CD7F21C82DFDD003E817D /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7F11C82DFDD003E817D /* TimelineController.swift */; };
 		E4D95F381C76C7FA00AFA22D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D95F371C76C7FA00AFA22D /* AppDelegate.swift */; };
 		E4D95F3A1C76C7FA00AFA22D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D95F391C76C7FA00AFA22D /* LoginViewController.swift */; };
 		E4D95F3D1C76C7FA00AFA22D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D95F3B1C76C7FA00AFA22D /* Main.storyboard */; };
@@ -31,6 +39,14 @@
 		084B27B309C84B7B3E9290A8 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06A8A39E63F7A102E7BAD92 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BD0276182C1408D7449B3B60 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		E46CD7E21C8267DD003E817D /* TweetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetView.xib; sourceTree = "<group>"; };
+		E46CD7E41C82710E003E817D /* TweetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetView.swift; sourceTree = "<group>"; };
+		E46CD7E61C827551003E817D /* TweetzTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetzTableView.swift; sourceTree = "<group>"; };
+		E46CD7E81C82757F003E817D /* TweetzTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetzTableView.xib; sourceTree = "<group>"; };
+		E46CD7EA1C82779A003E817D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E46CD7EC1C82AE9A003E817D /* UIColor+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extensions.swift"; sourceTree = "<group>"; };
+		E46CD7EF1C82D948003E817D /* TweetDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDataSource.swift; sourceTree = "<group>"; };
+		E46CD7F11C82DFDD003E817D /* TimelineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineController.swift; sourceTree = "<group>"; };
 		E4D95F341C76C7FA00AFA22D /* vTweetz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vTweetz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D95F371C76C7FA00AFA22D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4D95F391C76C7FA00AFA22D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +97,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E46CD7EE1C82AF79003E817D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E46CD7EC1C82AE9A003E817D /* UIColor+extensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		E4D95F2B1C76C7FA00AFA22D = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +132,7 @@
 				E4D95F4E1C76CB9200AFA22D /* Models */,
 				E4D95F4D1C76CB8700AFA22D /* Supporting Files */,
 				E4D95F4C1C76CB7200AFA22D /* Views */,
+				E46CD7EE1C82AF79003E817D /* Extensions */,
 				E4D95F3B1C76C7FA00AFA22D /* Main.storyboard */,
 				E4D95F411C76C7FA00AFA22D /* Assets.xcassets */,
 				E4D95F431C76C7FA00AFA22D /* LaunchScreen.storyboard */,
@@ -119,6 +144,11 @@
 		E4D95F4C1C76CB7200AFA22D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E46CD7EF1C82D948003E817D /* TweetDataSource.swift */,
+				E46CD7E21C8267DD003E817D /* TweetView.xib */,
+				E46CD7E61C827551003E817D /* TweetzTableView.swift */,
+				E46CD7E81C82757F003E817D /* TweetzTableView.xib */,
+				E46CD7E41C82710E003E817D /* TweetView.swift */,
 				E4D95F5D1C78E57700AFA22D /* TweetCell.swift */,
 				E4D95F5E1C78E57700AFA22D /* TweetCell.xib */,
 				E4D95F671C7A69E100AFA22D /* TwitterKeyboard.swift */,
@@ -146,6 +176,8 @@
 		E4D95F4F1C76CB9B00AFA22D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E46CD7F11C82DFDD003E817D /* TimelineController.swift */,
+				E46CD7EA1C82779A003E817D /* ProfileViewController.swift */,
 				E4D95F391C76C7FA00AFA22D /* LoginViewController.swift */,
 				E4D95F5B1C770CC900AFA22D /* HomeViewController.swift */,
 				E4D95F631C79A58800AFA22D /* TweetViewController.swift */,
@@ -229,6 +261,8 @@
 				E4D95F421C76C7FA00AFA22D /* Assets.xcassets in Resources */,
 				E4D95F3D1C76C7FA00AFA22D /* Main.storyboard in Resources */,
 				E4D95F601C78E57700AFA22D /* TweetCell.xib in Resources */,
+				E46CD7E91C82757F003E817D /* TweetzTableView.xib in Resources */,
+				E46CD7E31C8267DD003E817D /* TweetView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,15 +323,21 @@
 			files = (
 				E4D95F3A1C76C7FA00AFA22D /* LoginViewController.swift in Sources */,
 				E4D95F541C76CCF900AFA22D /* HTTPClient.swift in Sources */,
+				E46CD7ED1C82AE9A003E817D /* UIColor+extensions.swift in Sources */,
 				E4D95F521C76CCEA00AFA22D /* TwitterAPI.swift in Sources */,
 				E4D95F681C7A69E100AFA22D /* TwitterKeyboard.swift in Sources */,
+				E46CD7E51C82710E003E817D /* TweetView.swift in Sources */,
+				E46CD7F01C82D948003E817D /* TweetDataSource.swift in Sources */,
 				E4D95F661C7A2F8E00AFA22D /* ComposeViewController.swift in Sources */,
+				E46CD7EB1C82779A003E817D /* ProfileViewController.swift in Sources */,
 				E4D95F641C79A58800AFA22D /* TweetViewController.swift in Sources */,
 				E4D95F5F1C78E57700AFA22D /* TweetCell.swift in Sources */,
+				E46CD7F21C82DFDD003E817D /* TimelineController.swift in Sources */,
 				E4D95F561C76CDE400AFA22D /* PersistenceManager.swift in Sources */,
 				E4D95F381C76C7FA00AFA22D /* AppDelegate.swift in Sources */,
 				E4D95F5C1C770CC900AFA22D /* HomeViewController.swift in Sources */,
 				E4D95F401C76C7FA00AFA22D /* vTweetz.xcdatamodeld in Sources */,
+				E46CD7E71C827551003E817D /* TweetzTableView.swift in Sources */,
 				E4D95F581C76E52700AFA22D /* User.swift in Sources */,
 				E4D95F5A1C76E54600AFA22D /* Tweet.swift in Sources */,
 			);
