@@ -67,28 +67,19 @@ tweetsTableView.registerNib(cellNib, forCellReuseIdentifier: tweetCellId)
 
 tweetsTableView.estimatedRowHeight = 200
 tweetsTableView.rowHeight = UITableViewAutomaticDimension
-setTweetyNavBar()
+setTweetyNavBar() ---------> Not done yet
 fetchTweets()
 
 refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
 tweetsTableView.insertSubview(refreshControl, atIndex: 0)
 }
 
-func setTweetyNavBar(){
-let logo = UIImage(named: "Twitter_logo_blue_32")
-let imageView = UIImageView(image:logo)
-self.navigationItem.titleView = imageView
-}
-
-
-@IBAction func onLogout(sender: UIBarButtonItem) {
-User.currentUser?.logout()
-}
-
+//Done
 //Fetch Tweets
 func fetchTweets(){
 TwitterAPI.sharedInstance.fetchTweets(tweetStatus, completion: onFetchCompletion)
 }
+
 
 func onFetchCompletion(tweets: [Tweet]?, error: NSError?){
 if tweets != nil{
@@ -99,6 +90,27 @@ print("ERROR OCCURED: \(error?.description)")
 }
 if refreshControl.refreshing{
 refreshControl.endRefreshing()
+}
+
+func refreshControlAction(refreshControl: UIRefreshControl) {
+self.fetchTweets()
+}
+
+
+override func didReceiveMemoryWarning() {
+super.didReceiveMemoryWarning()
+}
+
+//Not done
+func setTweetyNavBar(){
+let logo = UIImage(named: "Twitter_logo_blue_32")
+let imageView = UIImageView(image:logo)
+self.navigationItem.titleView = imageView
+}
+
+
+@IBAction func onLogout(sender: UIBarButtonItem) {
+User.currentUser?.logout()
 }
 
 }
@@ -130,9 +142,6 @@ destination.hidesBottomBarWhenPushed = true
 }
 }
 
-func refreshControlAction(refreshControl: UIRefreshControl) {
-self.fetchTweets()
-}
 
 func loadMoreTweets(){
 if tweets.count > 0{
@@ -152,9 +161,6 @@ print("ERROR OCCURED: \(error?.description)")
 }
 }
 
-override func didReceiveMemoryWarning() {
-super.didReceiveMemoryWarning()
-}
 
 }
 

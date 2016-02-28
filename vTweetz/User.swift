@@ -59,7 +59,6 @@ class User: NSObject {
                 }
             }
         }
-        print(dictionary)
     }
     
     func logout(){

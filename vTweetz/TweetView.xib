@@ -69,7 +69,7 @@
                             <state key="normal" title="Button" image="reply-action_0"/>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqU-Vk-s9l">
-                            <rect key="frame" x="60" y="0.0" width="43.5" height="20"/>
+                            <rect key="frame" x="60" y="0.0" width="44" height="20"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofo-UN-2vR" userLabel="Retweet Button">
                                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -81,7 +81,7 @@
                                     <state key="normal" title="Button" image="retweet-action"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XD-8o-98Y">
-                                    <rect key="frame" x="20" y="0.0" width="23.5" height="20"/>
+                                    <rect key="frame" x="20" y="0.0" width="24" height="20"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                     <color key="textColor" red="0.60392156860000001" green="0.66274509800000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>

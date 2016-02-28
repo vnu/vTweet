@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetzTableView: UITableView {
+class TweetzTableView: UITableView{
     
     @IBOutlet weak var tweetzTable: UITableView!
     
@@ -62,10 +62,48 @@ class TweetzTableView: UITableView {
         }
     }
     
+    // Pull to Refresh
     func refreshControlAction(refreshControl: UIRefreshControl) {
         self.fetchTweets()
     }
     
+    // Infinite Scrolling
+    func loadMoreTweets(){
+        print("Loading More tweets")
+        let currentTweets = self.datasource.tweets
+        if  currentTweets.count > 0{
+            let maxTweetId = currentTweets.last?.tweetId!
+            TwitterAPI.sharedInstance.loadMoreTweets(fetchEndpoint, maxId: maxTweetId!) { (tweets, error) -> Void in
+                if tweets != nil{
+                    self.datasource.tweets = currentTweets + tweets!
+                    self.reloadData()
+                    if(self.isMoreDataLoading){
+                        self.isMoreDataLoading = false
+                    }
+                }else{
+                    print("ERROR OCCURED: \(error?.description)")
+                }
+                
+            }
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        print("Scroll View Did Scroll")
+        if (!self.isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            
+            let scrollViewContentHeight = self.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - (self.bounds.size.height)
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && self.dragging && !self.reachedAPILimit) {
+                self.isMoreDataLoading = true
+                self.loadMoreTweets()
+            }
+            
+        }
+    }
 
     /*
     // Only override drawRect: if you perform custom drawing.

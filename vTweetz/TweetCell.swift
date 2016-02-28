@@ -11,6 +11,7 @@ import ActiveLabel
 
 @objc protocol TweetCellDelegate {
     optional func tweetCell(tweetCell: TweetCell, onTweetReply value: Tweet)
+    optional func tweetCell(tweetCell: TweetCell, onProfileImageTap value: Tweet)
 }
 
 class TweetCell: UITableViewCell {
@@ -126,6 +127,13 @@ class TweetCell: UITableViewCell {
         tweet.retweet()
     }
     
+    func imageTapped(sender: UITapGestureRecognizer){
+        print("User Tapped Imaged")
+        delegate?.tweetCell?(self, onProfileImageTap: self.tweet)
+    }
+    
+    
+    
     @IBAction func onLike(sender: AnyObject) {
         if let liked = tweet.liked{
             if liked{
@@ -148,6 +156,9 @@ class TweetCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("imageTapped:"))
+        //Add the recognizer to your view.
+        self.profileImage.addGestureRecognizer(tapRecognizer)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     let tweetCellId = "com.vnu.tweetcell"
     let tweetStatus = "home_timeline.json"
     let detailSegueId = "com.vnu.tweetDetail"
+    let profileViewSegue = "ProfileViewSegue"
     let refreshControl = UIRefreshControl()
     
     let replySegueId = "com.vnu.ReplySegue"
@@ -93,6 +94,15 @@ class HomeViewController: UIViewController {
                 destination.delegate = self
                 destination.hidesBottomBarWhenPushed = true
             }
+        }else if(segue.identifier == profileViewSegue){
+            if let destination = segue.destinationViewController as? ProfileViewController {
+                if let cell = sender as? TweetCell{
+                    let indexPath = self.tweetsTableView!.indexPathForCell(cell)
+                    let index = indexPath!.row
+                    destination.user = tweets[index].user!
+                }
+            }
+            
         }
     }
     
@@ -171,6 +181,11 @@ extension HomeViewController:UITableViewDelegate, UITableViewDataSource, TweetCe
     func tweetCell(tweetCell: TweetCell, onTweetReply value: Tweet) {
         print ("On reply delegate")
         self.performSegueWithIdentifier(replySegueId, sender: tweetCell)
+    }
+    
+    func tweetCell(tweetCell: TweetCell, onProfileImageTap value: Tweet) {
+        print("on image delegate")
+           self.performSegueWithIdentifier(profileViewSegue, sender: tweetCell)
     }
     
 }

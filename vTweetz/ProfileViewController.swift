@@ -23,19 +23,18 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var tweetsSeparatorView: UIView!
     
-    @IBOutlet weak var profileContentView: UIView!
-
+    @IBOutlet weak var tweetsView: UIView!
     var tweetsTableView: TweetzTableView!
     
-    var user: User!
+    var user = User.currentUser!
     var tweets = [Tweet]()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        user = User.currentUser
         setUserInfo()
         initTweetsTable()
+//        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,25 +59,47 @@ class ProfileViewController: UIViewController {
         followersLabel.text = "\(user.followersCount!)"
     }
     
+    func showTweetsWith(endpoint: String){
+        print(endpoint)
+        tweetsTableView.fetchEndpoint = endpoint
+        tweetsTableView.fetchTweets()
+    }
+    
     func initTweetsTable(){
         print("Came here added something")
         if let tweetsTblView = NSBundle.mainBundle().loadNibNamed("TweetzTableView", owner: self, options: nil).first as? TweetzTableView {
             tweetsTableView = tweetsTblView
-            tweetsTableView.initView("user_timeline.json")
+            tweetsTableView.initView()
             tweetsTableView.translatesAutoresizingMaskIntoConstraints = false
-            profileContentView.addSubview(tweetsTableView)
+            tweetsView.addSubview(tweetsTableView)
             setConstraints()
-            tweetsTableView.fetchTweets()
+            showTweetsWith("user_timeline.json?screen_name=\(user.screenName!)")
         }
     }
     
     func setConstraints(){
-        let views = ["separatorView": self.tweetsSeparatorView, "tableView": self.tweetsTableView]
+        let views = ["tweetsView": self.tweetsView, "tableView": self.tweetsTableView]
         let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[tableView]-0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: views)
-        profileContentView.addConstraints(horizontalConstraints)
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[separatorView]-0-[tableView]-0-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: views)
-        profileContentView.addConstraints(verticalConstraints)
+        tweetsView.addConstraints(horizontalConstraints)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-(-40)-[tableView]-0-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: views)
+        tweetsView.addConstraints(verticalConstraints)
     }
+    
+    //Tweets Buttons
+    
+    @IBAction func onTweetsTap(sender: UIButton) {
+        showTweetsWith("user_timeline.json?screen_name=\(user.screenName!)")
+    }
+    
+    
+    @IBAction func onMediaTap(sender: UIButton) {
+        showTweetsWith("mentions_timeline.json")
+    }
+    
+    
+    @IBAction func onLikesTap(sender: UIButton) {
+    }
+    
 
     /*
     // MARK: - Navigation
