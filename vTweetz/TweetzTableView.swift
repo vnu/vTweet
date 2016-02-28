@@ -37,7 +37,6 @@ class TweetzTableView: UITableView{
         }
         self.estimatedRowHeight = 200
         self.dataSource = datasource
-        self.delegate = datasource
         self.rowHeight = UITableViewAutomaticDimension
         
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
@@ -46,8 +45,8 @@ class TweetzTableView: UITableView{
     
     
     //Fetch Tweets
-    func fetchTweets(){
-        TwitterAPI.sharedInstance.fetchTweets(fetchEndpoint, completion: onFetchCompletion)
+    func fetchTweets(parameters: NSDictionary = NSDictionary()){
+        TwitterAPI.sharedInstance.fetchTweets(fetchEndpoint, parameters: parameters, completion: onFetchCompletion)
     }
     
     func onFetchCompletion(tweets: [Tweet]?, error: NSError?){
@@ -68,12 +67,14 @@ class TweetzTableView: UITableView{
     }
     
     // Infinite Scrolling
-    func loadMoreTweets(){
+    func loadMoreTweets(var parameters: Dictionary<String, String>){
         print("Loading More tweets")
         let currentTweets = self.datasource.tweets
         if  currentTweets.count > 0{
             let maxTweetId = currentTweets.last?.tweetId!
-            TwitterAPI.sharedInstance.loadMoreTweets(fetchEndpoint, maxId: maxTweetId!) { (tweets, error) -> Void in
+            parameters["max_id"] = maxTweetId!
+
+            TwitterAPI.sharedInstance.loadMoreTweets(fetchEndpoint, parameters: parameters) { (tweets, error) -> Void in
                 if tweets != nil{
                     self.datasource.tweets = currentTweets + tweets!
                     self.reloadData()
@@ -87,24 +88,6 @@ class TweetzTableView: UITableView{
             }
         }
     }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        print("Scroll View Did Scroll")
-        if (!self.isMoreDataLoading) {
-            // Calculate the position of one screen length before the bottom of the results
-            
-            let scrollViewContentHeight = self.contentSize.height
-            let scrollOffsetThreshold = scrollViewContentHeight - (self.bounds.size.height)
-            
-            // When the user has scrolled past the threshold, start requesting
-            if(scrollView.contentOffset.y > scrollOffsetThreshold && self.dragging && !self.reachedAPILimit) {
-                self.isMoreDataLoading = true
-                self.loadMoreTweets()
-            }
-            
-        }
-    }
-
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

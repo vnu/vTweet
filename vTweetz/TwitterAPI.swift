@@ -42,8 +42,8 @@ class TwitterAPI{
         httpClient.createTweet(postUrl, tweet: tweet, completion: completion)
     }
     
-    func fetchTweets(fetchString: String, completion: (tweets: [Tweet]?, error: NSError?)->()){
-       httpClient.fetchTweets(fetchString, completion: completion)
+    func fetchTweets(fetchString: String, parameters: NSDictionary, completion: (tweets: [Tweet]?, error: NSError?)->()){
+        httpClient.fetchTweets(fetchString, parameters: parameters, completion: completion)
     }
     
     func likeOnTweet(tweetId: String, action: String, completion: (tweet: Tweet?, error: NSError?) -> Void){
@@ -54,8 +54,8 @@ class TwitterAPI{
         httpClient.postOnTweet(postUrl, completion: completion)
     }
     
-    func loadMoreTweets(fetchUrl:String, maxId: String, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
-        httpClient.loadMoreTweets(fetchUrl, maxId: maxId, completion: completion)
+    func loadMoreTweets(fetchUrl:String, parameters: NSDictionary, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
+        httpClient.loadMoreTweets(fetchUrl, parameters: parameters, completion: completion)
     }
     
     

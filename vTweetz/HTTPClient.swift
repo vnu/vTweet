@@ -65,9 +65,9 @@ class HTTPClient: BDBOAuth1SessionManager{
         }
     }
     
-    func fetchTweets(fetchUrl:String, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
+    func fetchTweets(fetchUrl:String, parameters: NSDictionary, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
         fetchTweetsCompletion = completion
-        self.GET("1.1/statuses/\(fetchUrl)", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
+        self.GET("1.1/statuses/\(fetchUrl)", parameters: parameters, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
             if let timeline = response as? [NSDictionary]{
                 let tweets = Tweet.tweetsWithArray(timeline)
                 self.fetchTweetsCompletion?(tweets: tweets, error: nil)
@@ -78,11 +78,11 @@ class HTTPClient: BDBOAuth1SessionManager{
         }
     }
     
-    func loadMoreTweets(fetchUrl:String, maxId: String, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
+    func loadMoreTweets(fetchUrl:String, parameters: NSDictionary, completion: (tweets: [Tweet]?, error: NSError?) -> Void){
         fetchTweetsCompletion = completion
-        self.GET("1.1/statuses/\(fetchUrl)?max_id=\(maxId)", parameters: nil, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
+        self.GET("1.1/statuses/\(fetchUrl)", parameters: parameters, progress: nil, success: { (session: NSURLSessionDataTask, response:AnyObject?) -> Void in
             if let timeline = response as? [NSDictionary]{
-                let tweets = Tweet.tweetsWithArray(timeline, maxId: maxId)
+                let tweets = Tweet.tweetsWithArray(timeline, maxId: parameters["max_id"] as? String)
                 self.fetchTweetsCompletion?(tweets: tweets, error: nil)
             }
             }) { (session: NSURLSessionDataTask?, error:NSError) -> Void in

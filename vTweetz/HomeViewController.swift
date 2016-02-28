@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
     
     //Fetch Tweets
     func fetchTweets(){
-        TwitterAPI.sharedInstance.fetchTweets(tweetStatus, completion: onFetchCompletion)
+        TwitterAPI.sharedInstance.fetchTweets(tweetStatus, parameters: NSDictionary(), completion: onFetchCompletion)
     }
     
     func onFetchCompletion(tweets: [Tweet]?, error: NSError?){
@@ -113,7 +113,8 @@ class HomeViewController: UIViewController {
     func loadMoreTweets(){
         if tweets.count > 0{
         let maxTweetId = tweets.last?.tweetId!
-        TwitterAPI.sharedInstance.loadMoreTweets(tweetStatus, maxId: maxTweetId!) { (tweets, error) -> Void in
+        let parameters = ["max_id":maxTweetId!]
+        TwitterAPI.sharedInstance.loadMoreTweets(tweetStatus, parameters: parameters) { (tweets, error) -> Void in
             if tweets != nil{
                 self.tweets = self.tweets + tweets!
                 self.tweetsTableView.reloadData()

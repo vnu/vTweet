@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDelegate {
 
 
     @IBOutlet weak var profileBgImage: UIImageView!
@@ -28,12 +28,16 @@ class ProfileViewController: UIViewController {
     
     var user = User.currentUser!
     var tweets = [Tweet]()
+    
+    var parameters = [String:String]()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUserInfo()
         initTweetsTable()
+        parameters["screen_name"] = user.screenName!
+        tweetsTableView.delegate = self
 //        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
@@ -60,30 +64,46 @@ class ProfileViewController: UIViewController {
     }
     
     func showTweetsWith(endpoint: String){
-        print(endpoint)
         tweetsTableView.fetchEndpoint = endpoint
-        tweetsTableView.fetchTweets()
+        tweetsTableView.fetchTweets(parameters)
     }
     
     func initTweetsTable(){
-        print("Came here added something")
         if let tweetsTblView = NSBundle.mainBundle().loadNibNamed("TweetzTableView", owner: self, options: nil).first as? TweetzTableView {
             tweetsTableView = tweetsTblView
             tweetsTableView.initView()
-            tweetsTableView.translatesAutoresizingMaskIntoConstraints = false
             tweetsView.addSubview(tweetsTableView)
             setConstraints()
             showTweetsWith("user_timeline.json?screen_name=\(user.screenName!)")
         }
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (!tweetsTableView.isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            
+            let scrollViewContentHeight = tweetsTableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - (tweetsTableView.bounds.size.height)
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tweetsTableView.dragging && !tweetsTableView.reachedAPILimit) {
+                tweetsTableView.isMoreDataLoading = true
+                tweetsTableView.loadMoreTweets(parameters)
+            }
+            
+        }
+    }
+    
     func setConstraints(){
         let views = ["tweetsView": self.tweetsView, "tableView": self.tweetsTableView]
+        tweetsTableView.translatesAutoresizingMaskIntoConstraints = false
         let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[tableView]-0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: views)
         tweetsView.addConstraints(horizontalConstraints)
         let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-(-40)-[tableView]-0-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: views)
         tweetsView.addConstraints(verticalConstraints)
     }
+    
+
     
     //Tweets Buttons
     
