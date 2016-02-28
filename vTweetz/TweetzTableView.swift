@@ -19,6 +19,7 @@ class TweetzTableView: UITableView{
     var fetchEndpoint = "home_timeline.json"
     
     let refreshControl = UIRefreshControl()
+    var tableCellDelegate: TweetCellDelegate?
     
     //Segues
     let replySegueId = "com.vnu.ReplySegue"
@@ -26,8 +27,10 @@ class TweetzTableView: UITableView{
     let detailSegueId = "com.vnu.tweetDetail"
     
     let datasource = TweetDataSource()
-
-
+    
+    func setCellDelegate(delegate: TweetCellDelegate?){
+        datasource.cellDelegate = delegate
+    }
     
     func initView(fetchEndpoint: String = "home_timeline.json"){
         let cellNib = UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle())

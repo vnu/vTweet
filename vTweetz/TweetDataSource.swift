@@ -16,12 +16,13 @@ class TweetDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     //Model Vars
     var user: User!
     var tweets = [Tweet]()
+    var cellDelegate:TweetCellDelegate?
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(tweetCellId) as! TweetCell
         cell.tweet = tweets[indexPath.row]
-        //        cell.delegate = self
+        cell.delegate = cellDelegate
         return cell
     }
     

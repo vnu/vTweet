@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate {
+class ProfileViewController: UIViewController, UITableViewDelegate, TweetCellDelegate {
 
 
     @IBOutlet weak var profileBgImage: UIImageView!
@@ -34,10 +34,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUserInfo()
         initTweetsTable()
-        parameters["screen_name"] = user.screenName!
+        refreshViewData()
         tweetsTableView.delegate = self
+        tweetsTableView.setCellDelegate(self)
 //        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
@@ -46,8 +46,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     }
     
     
-    func setUserInfo(){
+    func refreshViewData(){
         nameLabel.text = user.name
+        parameters["screen_name"] = user.screenName!
         screenNameLabel.text = "@\(user.screenName!)"
         if let profileBgImageUrl = user.profileBgImageUrl{
             profileBgImage.setImageWithURL(NSURL(string: profileBgImageUrl)!)
@@ -61,21 +62,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         websiteLinkLabel.text = user.expandedUrl
         followingLabel.text = "\(user.friendsCount!)"
         followersLabel.text = "\(user.followersCount!)"
+        showTweetsWith("user_timeline.json?screen_name=\(user.screenName!)")
     }
     
     func showTweetsWith(endpoint: String){
         tweetsTableView.fetchEndpoint = endpoint
         tweetsTableView.fetchTweets(parameters)
-    }
-    
-    func initTweetsTable(){
-        if let tweetsTblView = NSBundle.mainBundle().loadNibNamed("TweetzTableView", owner: self, options: nil).first as? TweetzTableView {
-            tweetsTableView = tweetsTblView
-            tweetsTableView.initView()
-            tweetsView.addSubview(tweetsTableView)
-            setConstraints()
-            showTweetsWith("user_timeline.json?screen_name=\(user.screenName!)")
-        }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -90,7 +82,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
                 tweetsTableView.isMoreDataLoading = true
                 tweetsTableView.loadMoreTweets(parameters)
             }
-            
+        }
+    }
+    
+    func initTweetsTable(){
+        if let tweetsTblView = NSBundle.mainBundle().loadNibNamed("TweetzTableView", owner: self, options: nil).first as? TweetzTableView {
+            tweetsTableView = tweetsTblView
+            tweetsTableView.initView()
+            tweetsView.addSubview(tweetsTableView)
+            setConstraints()
         }
     }
     
@@ -101,6 +101,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         tweetsView.addConstraints(horizontalConstraints)
         let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-(-40)-[tableView]-0-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: views)
         tweetsView.addConstraints(verticalConstraints)
+    }
+    
+    func tweetCell(tweetCell: TweetCell, onProfileImageTap value: Tweet) {
+        print("Came here to profit")
+        self.user = value.user!
+        self.refreshViewData()
     }
     
 
