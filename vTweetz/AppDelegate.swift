@@ -18,16 +18,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
+//        initiateHamburger()
         if User.currentUser != nil{
-            print("CurrentUser Detected")
-            let vc = vStoryboard.instantiateViewControllerWithIdentifier("TweetsTabBarController") as! UITabBarController
-            window?.rootViewController = vc
+            userSignedInView()
         }
+        
+        return true
+    }
+    
+    func initiateHamburger(){
+        let hamburgerViewController = vStoryboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
+        let menuViewController = vStoryboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+        hamburgerViewController.menuViewController = menuViewController
+        menuViewController.hamburgerViewController = hamburgerViewController
+    }
+    
+    func userSignedInView(){
+        let vc = vStoryboard.instantiateViewControllerWithIdentifier("TweetsTabBarController") as! UITabBarController
+        window?.rootViewController = vc
+    }
+    
+    func navbarAppearance(){
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: twitterBlue]
         UINavigationBar.appearance().tintColor = twitterBlue
         UITabBar.appearance().tintColor = twitterBlue
-        
-        return true
     }
     
     func userDidLogout(){

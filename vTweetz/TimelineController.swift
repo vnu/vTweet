@@ -22,7 +22,6 @@ class TimelineController: UIViewController {
     }
     
     func commonInit(){
-        print("Came here added something")
         if let tweetsTblView = NSBundle.mainBundle().loadNibNamed("TweetzTableView", owner: self, options: nil).first as? TweetzTableView {
             tweetsTableView = tweetsTblView
             tweetsTableView.initView("mentions_timeline.json")

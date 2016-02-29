@@ -16,6 +16,9 @@
 		E46CD7ED1C82AE9A003E817D /* UIColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7EC1C82AE9A003E817D /* UIColor+extensions.swift */; };
 		E46CD7F01C82D948003E817D /* TweetDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7EF1C82D948003E817D /* TweetDataSource.swift */; };
 		E46CD7F21C82DFDD003E817D /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7F11C82DFDD003E817D /* TimelineController.swift */; };
+		E46CD7F41C83A856003E817D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7F31C83A856003E817D /* MenuViewController.swift */; };
+		E46CD7F61C83A86E003E817D /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7F51C83A86E003E817D /* HamburgerViewController.swift */; };
+		E46CD7F81C83BFCC003E817D /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46CD7F71C83BFCC003E817D /* MenuCell.swift */; };
 		E4D95F381C76C7FA00AFA22D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D95F371C76C7FA00AFA22D /* AppDelegate.swift */; };
 		E4D95F3A1C76C7FA00AFA22D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D95F391C76C7FA00AFA22D /* LoginViewController.swift */; };
 		E4D95F3D1C76C7FA00AFA22D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D95F3B1C76C7FA00AFA22D /* Main.storyboard */; };
@@ -47,6 +50,9 @@
 		E46CD7EC1C82AE9A003E817D /* UIColor+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extensions.swift"; sourceTree = "<group>"; };
 		E46CD7EF1C82D948003E817D /* TweetDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDataSource.swift; sourceTree = "<group>"; };
 		E46CD7F11C82DFDD003E817D /* TimelineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineController.swift; sourceTree = "<group>"; };
+		E46CD7F31C83A856003E817D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		E46CD7F51C83A86E003E817D /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		E46CD7F71C83BFCC003E817D /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		E4D95F341C76C7FA00AFA22D /* vTweetz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vTweetz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D95F371C76C7FA00AFA22D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4D95F391C76C7FA00AFA22D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 				E4D95F5D1C78E57700AFA22D /* TweetCell.swift */,
 				E4D95F5E1C78E57700AFA22D /* TweetCell.xib */,
 				E4D95F671C7A69E100AFA22D /* TwitterKeyboard.swift */,
+				E46CD7F71C83BFCC003E817D /* MenuCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -182,6 +189,8 @@
 				E4D95F5B1C770CC900AFA22D /* HomeViewController.swift */,
 				E4D95F631C79A58800AFA22D /* TweetViewController.swift */,
 				E4D95F651C7A2F8E00AFA22D /* ComposeViewController.swift */,
+				E46CD7F31C83A856003E817D /* MenuViewController.swift */,
+				E46CD7F51C83A86E003E817D /* HamburgerViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -327,14 +336,17 @@
 				E4D95F521C76CCEA00AFA22D /* TwitterAPI.swift in Sources */,
 				E4D95F681C7A69E100AFA22D /* TwitterKeyboard.swift in Sources */,
 				E46CD7E51C82710E003E817D /* TweetView.swift in Sources */,
+				E46CD7F61C83A86E003E817D /* HamburgerViewController.swift in Sources */,
 				E46CD7F01C82D948003E817D /* TweetDataSource.swift in Sources */,
 				E4D95F661C7A2F8E00AFA22D /* ComposeViewController.swift in Sources */,
 				E46CD7EB1C82779A003E817D /* ProfileViewController.swift in Sources */,
 				E4D95F641C79A58800AFA22D /* TweetViewController.swift in Sources */,
 				E4D95F5F1C78E57700AFA22D /* TweetCell.swift in Sources */,
+				E46CD7F41C83A856003E817D /* MenuViewController.swift in Sources */,
 				E46CD7F21C82DFDD003E817D /* TimelineController.swift in Sources */,
 				E4D95F561C76CDE400AFA22D /* PersistenceManager.swift in Sources */,
 				E4D95F381C76C7FA00AFA22D /* AppDelegate.swift in Sources */,
+				E46CD7F81C83BFCC003E817D /* MenuCell.swift in Sources */,
 				E4D95F5C1C770CC900AFA22D /* HomeViewController.swift in Sources */,
 				E4D95F401C76C7FA00AFA22D /* vTweetz.xcdatamodeld in Sources */,
 				E46CD7E71C827551003E817D /* TweetzTableView.swift in Sources */,
