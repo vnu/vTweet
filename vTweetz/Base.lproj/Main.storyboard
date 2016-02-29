@@ -661,7 +661,7 @@
                             <constraint firstItem="UAJ-Th-Pof" firstAttribute="top" secondItem="2sx-DC-3VN" secondAttribute="bottom" id="qS2-qA-6GR"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="MultiView" id="XIW-4a-FVa"/>
+                    <tabBarItem key="tabBarItem" title="MultiView" image="hamburger" id="XIW-4a-FVa"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="contentView" destination="2sx-DC-3VN" id="pnw-PE-mco"/>
@@ -809,6 +809,7 @@
     <resources>
         <image name="Twitter_logo_blue_48" width="48" height="48"/>
         <image name="colorful heart" width="2560" height="1600"/>
+        <image name="hamburger" width="16" height="16"/>
         <image name="home" width="20" height="17"/>
         <image name="like-action" width="54" height="72"/>
         <image name="new-tweet" width="30" height="21"/>
