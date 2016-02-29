@@ -63,18 +63,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aec-B3-NMh" userLabel="TweetsView">
-                                <rect key="frame" x="0.0" y="355" width="414" height="381"/>
+                                <rect key="frame" x="0.0" y="353" width="414" height="383"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="net-7p-gHS">
-                                <rect key="frame" x="0.0" y="354" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="352" width="414" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="HPG-xm-uaE"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrO-QW-H2T" userLabel="Profile content view">
-                                <rect key="frame" x="0.0" y="204" width="414" height="150"/>
+                                <rect key="frame" x="0.0" y="204" width="414" height="148"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkK-0S-4bv">
                                         <rect key="frame" x="8" y="35" width="77" height="19.5"/>
@@ -124,28 +124,30 @@
                                         <color key="textColor" red="0.60392156860000001" green="0.66274509800000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="cnl-Tt-x0U">
-                                        <rect key="frame" x="8" y="119" width="398" height="30"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nr9-ka-8jN">
+                                        <rect key="frame" x="0.0" y="119" width="414" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="wje-qw-TP6"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="cnl-Tt-x0U">
+                                        <rect key="frame" x="0.0" y="120" width="414" height="28"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-xE-KdV">
-                                                <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="182" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title="Tweets"/>
                                                 <connections>
                                                     <action selector="onTweetsTap:" destination="mlo-bt-N5H" eventType="touchUpInside" id="udH-9j-4WP"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JC-vn-H0D">
-                                                <rect key="frame" x="173" y="0.0" width="64" height="30"/>
+                                                <rect key="frame" x="182" y="0.0" width="232" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title="Mentions"/>
                                                 <connections>
                                                     <action selector="onMediaTap:" destination="mlo-bt-N5H" eventType="touchUpInside" id="Qd0-Hp-Bzp"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJ5-Rs-Xnh">
-                                                <rect key="frame" x="362" y="0.0" width="36" height="30"/>
-                                                <state key="normal" title="Likes"/>
-                                                <connections>
-                                                    <action selector="onLikesTap:" destination="mlo-bt-N5H" eventType="touchUpInside" id="ZS8-hr-Tcq"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -159,15 +161,20 @@
                                     <constraint firstItem="eMl-KG-iLC" firstAttribute="leading" secondItem="OkK-0S-4bv" secondAttribute="leading" id="Ac4-9G-q1Z"/>
                                     <constraint firstItem="xEs-dL-pFX" firstAttribute="top" secondItem="yHp-tZ-4SQ" secondAttribute="bottom" constant="4" id="BAa-1E-Hda"/>
                                     <constraint firstAttribute="trailing" secondItem="yHp-tZ-4SQ" secondAttribute="trailing" id="BjB-gI-aDo"/>
+                                    <constraint firstAttribute="bottom" secondItem="cnl-Tt-x0U" secondAttribute="bottom" id="DPW-vs-e52"/>
                                     <constraint firstItem="ZjG-4A-gDE" firstAttribute="centerY" secondItem="eMl-KG-iLC" secondAttribute="centerY" id="Dwf-yN-9vF"/>
+                                    <constraint firstItem="Nr9-ka-8jN" firstAttribute="leading" secondItem="xrO-QW-H2T" secondAttribute="leading" id="EN2-PW-SOB"/>
                                     <constraint firstItem="rCz-4R-3q4" firstAttribute="centerY" secondItem="xEs-dL-pFX" secondAttribute="centerY" id="J8A-oC-8Dl"/>
-                                    <constraint firstAttribute="trailing" secondItem="cnl-Tt-x0U" secondAttribute="trailing" constant="8" id="LVM-wM-B58"/>
+                                    <constraint firstAttribute="trailing" secondItem="cnl-Tt-x0U" secondAttribute="trailing" id="LVM-wM-B58"/>
                                     <constraint firstItem="rCz-4R-3q4" firstAttribute="leading" secondItem="xEs-dL-pFX" secondAttribute="trailing" constant="50" id="MJa-8q-lA2"/>
+                                    <constraint firstItem="cnl-Tt-x0U" firstAttribute="top" secondItem="Nr9-ka-8jN" secondAttribute="bottom" id="MLc-Ya-Ypw"/>
                                     <constraint firstAttribute="trailing" secondItem="rCz-4R-3q4" secondAttribute="trailing" id="Nh1-tD-kS3"/>
-                                    <constraint firstItem="cnl-Tt-x0U" firstAttribute="leading" secondItem="xrO-QW-H2T" secondAttribute="leading" constant="8" id="OH6-d4-eRp"/>
-                                    <constraint firstItem="cnl-Tt-x0U" firstAttribute="top" secondItem="Yhd-SP-hpb" secondAttribute="bottom" constant="4" id="SQq-HG-fv3"/>
+                                    <constraint firstItem="cnl-Tt-x0U" firstAttribute="leading" secondItem="xrO-QW-H2T" secondAttribute="leading" id="OH6-d4-eRp"/>
+                                    <constraint firstItem="cnl-Tt-x0U" firstAttribute="top" secondItem="Yhd-SP-hpb" secondAttribute="bottom" constant="2" id="SQq-HG-fv3"/>
                                     <constraint firstItem="ku4-KO-a1L" firstAttribute="leading" secondItem="ZjG-4A-gDE" secondAttribute="trailing" constant="2" id="TeR-ya-Tuq"/>
-                                    <constraint firstAttribute="height" constant="150" id="V4X-D1-GVS"/>
+                                    <constraint firstAttribute="height" constant="148" id="V4X-D1-GVS"/>
+                                    <constraint firstItem="Nr9-ka-8jN" firstAttribute="top" secondItem="ku4-KO-a1L" secondAttribute="bottom" constant="4" id="Vdo-1k-Z9J"/>
+                                    <constraint firstAttribute="trailing" secondItem="Nr9-ka-8jN" secondAttribute="trailing" id="dMp-h0-LRh"/>
                                     <constraint firstItem="Yhd-SP-hpb" firstAttribute="centerY" secondItem="eMl-KG-iLC" secondAttribute="centerY" id="eJG-Uq-3di"/>
                                     <constraint firstItem="OkK-0S-4bv" firstAttribute="top" secondItem="xrO-QW-H2T" secondAttribute="top" constant="35" id="gwp-Vd-pTt"/>
                                     <constraint firstItem="OkK-0S-4bv" firstAttribute="leading" secondItem="xrO-QW-H2T" secondAttribute="leading" constant="8" id="iHK-QU-Kg6"/>
@@ -177,6 +184,11 @@
                                     <constraint firstItem="ku4-KO-a1L" firstAttribute="centerY" secondItem="eMl-KG-iLC" secondAttribute="centerY" id="vjZ-pK-odC"/>
                                     <constraint firstItem="rCz-4R-3q4" firstAttribute="top" secondItem="yHp-tZ-4SQ" secondAttribute="bottom" constant="4" id="ynh-AY-Tmq"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="SQq-HG-fv3"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UVx-yb-z0H">
                                 <rect key="frame" x="0.0" y="64" width="414" height="140"/>
