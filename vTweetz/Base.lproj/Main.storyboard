@@ -154,6 +154,7 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="Yhd-SP-hpb" firstAttribute="leading" secondItem="eMl-KG-iLC" secondAttribute="trailing" constant="2" id="1rq-tu-usv"/>
                                     <constraint firstItem="ZjG-4A-gDE" firstAttribute="leading" secondItem="Yhd-SP-hpb" secondAttribute="trailing" constant="30" id="3pD-vF-M6G"/>
@@ -189,6 +190,9 @@
                                         <exclude reference="SQq-HG-fv3"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Efg-fx-WJ8" appends="YES" id="Kbh-x8-PgN"/>
+                                </connections>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UVx-yb-z0H">
                                 <rect key="frame" x="0.0" y="64" width="414" height="140"/>
@@ -197,7 +201,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeA-hB-zdu" userLabel="Profile Image holder View">
-                                <rect key="frame" x="5" y="154" width="78" height="78"/>
+                                <rect key="frame" x="5" y="161" width="78" height="78"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="colorful heart" translatesAutoresizingMaskIntoConstraints="NO" id="GBd-rY-daL" userLabel="profileImage">
                                         <rect key="frame" x="2" y="2" width="74" height="74"/>
@@ -230,13 +234,13 @@
                             <constraint firstItem="UVx-yb-z0H" firstAttribute="leading" secondItem="Zgq-Pa-a8h" secondAttribute="leading" id="eRG-tg-7xR"/>
                             <constraint firstItem="UVx-yb-z0H" firstAttribute="top" secondItem="UnP-JT-ba0" secondAttribute="bottom" id="fcr-gQ-9Hn"/>
                             <constraint firstItem="net-7p-gHS" firstAttribute="leading" secondItem="Zgq-Pa-a8h" secondAttribute="leading" id="gv0-QQ-BG1"/>
+                            <constraint firstItem="JeA-hB-zdu" firstAttribute="bottom" secondItem="OkK-0S-4bv" secondAttribute="top" id="kUS-zF-WRE"/>
                             <constraint firstAttribute="bottom" secondItem="xrO-QW-H2T" secondAttribute="bottom" id="kXQ-rF-Rl4"/>
                             <constraint firstItem="xrO-QW-H2T" firstAttribute="leading" secondItem="Zgq-Pa-a8h" secondAttribute="leading" id="mUG-fI-bUO"/>
                             <constraint firstItem="net-7p-gHS" firstAttribute="top" secondItem="xrO-QW-H2T" secondAttribute="bottom" id="n1D-wA-3LD"/>
                             <constraint firstItem="JeA-hB-zdu" firstAttribute="leading" secondItem="Zgq-Pa-a8h" secondAttribute="leading" constant="5" id="qHv-uZ-wx4"/>
                             <constraint firstItem="xrO-QW-H2T" firstAttribute="top" secondItem="UVx-yb-z0H" secondAttribute="bottom" id="rqJ-PV-zdo"/>
                             <constraint firstAttribute="trailing" secondItem="xrO-QW-H2T" secondAttribute="trailing" id="sb1-G3-D64"/>
-                            <constraint firstItem="JeA-hB-zdu" firstAttribute="top" secondItem="UnP-JT-ba0" secondAttribute="bottom" constant="90" id="v3c-li-8sO"/>
                             <constraint firstItem="aec-B3-NMh" firstAttribute="top" secondItem="net-7p-gHS" secondAttribute="bottom" id="vyL-ZX-lso"/>
                         </constraints>
                         <variation key="default">
@@ -248,6 +252,7 @@
                     <navigationItem key="navigationItem" id="znl-Ug-QJr"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="bgImageHeightConstraint" destination="znC-b2-VHb" id="Dec-hO-Emn"/>
                         <outlet property="followersLabel" destination="ZjG-4A-gDE" id="QMd-g4-OYZ"/>
                         <outlet property="followingLabel" destination="eMl-KG-iLC" id="zoI-Ww-1Sj"/>
                         <outlet property="locationLabel" destination="xEs-dL-pFX" id="4AW-yK-zXB"/>
@@ -261,6 +266,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PV1-es-Ibx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Efg-fx-WJ8">
+                    <connections>
+                        <action selector="onPanGesture:" destination="mlo-bt-N5H" id="r53-L2-bzM"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1940" y="776"/>
         </scene>

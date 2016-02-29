@@ -30,7 +30,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, TweetCellDel
     var tweets = [Tweet]()
     
     var parameters = [String:String]()
+    
+    var originalBgImageHeight: CGFloat! = 140.0
 
+    @IBOutlet weak var bgImageHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +43,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, TweetCellDel
         tweetsTableView.setCellDelegate(self)
 //        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+//    func updateHeaderView(){
+//        var headerRect = CGRect(x: 0, y: -bgImageHeight, width: view.bounds.width, height: bgImageHeight)
+//    }
+//    
     
     func refreshViewData(){
         nameLabel.text = user.name
@@ -109,6 +116,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, TweetCellDel
         self.refreshViewData()
     }
     
+    @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
+        let translation = sender.translationInView(view)
+        let velocity = sender.velocityInView(view)
+        
+        if sender.state == UIGestureRecognizerState.Began{
+            originalBgImageHeight = bgImageHeightConstraint.constant
+        }else if sender.state == UIGestureRecognizerState.Changed{
+            bgImageHeightConstraint.constant = originalBgImageHeight + translation.y
+        }else if sender.state == UIGestureRecognizerState.Ended{
+            if velocity.y > 0{
+                bgImageHeightConstraint.constant = originalBgImageHeight
+            }else{
+                bgImageHeightConstraint.constant = originalBgImageHeight
+            }
+        }
+    }
 
     
     //Tweets Buttons
