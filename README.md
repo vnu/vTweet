@@ -47,6 +47,9 @@ Here's a walkthrough of implemented user stories:
 
 ![vtweetz](https://cloud.githubusercontent.com/assets/1395635/13212215/40b4d6fc-d8f4-11e5-95e2-97219d9709e8.gif)
 
+### Gif-2
+![vtweetz-4](https://cloud.githubusercontent.com/assets/1395635/13388496/473568c6-de75-11e5-9511-7c8e143de4a1.gif)
+
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
